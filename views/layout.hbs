@@ -3,20 +3,25 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>[Your Blog Name]</title>
+    <title>timeless</title>
+    <link rel="stylesheet" href="/styles/global.css" type="text/css">
 </head>
-<body>
-    <header>
-        <h1>[Your Blog Name]</h1>
-        <!-- Navigation Links -->
-    </header>
-    
-    <main>
-        {{ body }}
-    </main>
-    
+<div id="global-container">
+    <nav>
+        <img src="/img/icon.png" height="100px" width="100px" alt="App Icon">
+        <header>
+            <a href="/"><h1>timeless</h1></a>
+        </header>
+        <ul>
+            <li><a href="/login">Login</a></li>
+            <li><a href="/register">Register</a></li>
+        </ul>
+    </nav>  
+    <div id="content">
+        {{{ body }}}
+    </div>
     <footer>
-        &copy; [Your Blog Name] - [Current Year]
+        <p>&copy; Sashank Neupane</p>
     </footer>
-</body>
+</div>
 </html>

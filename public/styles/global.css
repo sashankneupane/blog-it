@@ -1,0 +1,65 @@
+.global-container {
+	margin: 0px;
+	padding: 0px;
+	max-width: 80%;
+}
+
+a {
+	text-decoration: none;
+}
+
+/* Navigation styles */
+nav {
+	color: #fff;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	padding: 10px;
+	box-shadow: 2px 2px 5px rgba(55, 181, 177, 0.2);
+	margin: 5px auto;
+  }
+  
+  nav h1 {
+	font-size: 28px;
+	margin: 0;
+	padding: 10px;
+	font-weight: normal;
+	text-decoration: none;
+	color: #4ea0d6;
+  }
+  
+  ul {
+	list-style: none;
+	margin: 0;
+	padding: 0;
+	display: flex;
+  }
+  
+  ul li {
+	margin: 0 20px;
+  }
+  
+  ul li a {
+	text-decoration: none;
+	font-size: 16px;
+	color: #1d3557;
+	padding: 10px 20px;
+	border-radius: 10px;
+	background-color: #60afe4;
+	display: block;
+  }
+  
+  ul li a:hover {
+	background-color: #1d3557;
+	color: #fff;
+  }
+
+/* Footer styles */
+footer {
+  display: flex;
+  justify-content: center;
+  align-items: flex-end; /* Align to the bottom */
+  position: fixed; /* Fixed position to stay at the bottom */
+  bottom: 0; /* Stick to the bottom */
+  width: 100%; /* Occupy full width of the viewport */
+}

@@ -1,53 +1,65 @@
-import express from 'express'
-import path from 'path'
+import './config.mjs';
+import './db.mjs';
+
+import express from 'express';
+import mongoose from 'mongoose';
+import path from 'path';
 import { fileURLToPath } from 'url';
 
 const app = express();
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
+app.use(express.static(path.resolve(__dirname, 'public')));
+
+app.use(express.urlencoded({ extended: false }));
+app.use(express.json());
+
 app.set('view engine', 'hbs');
+app.set('views', path.resolve(__dirname, 'views'));
 
-
-app.set('views', path.join(__dirname, 'views'));
-
-
-const userData = {
-  username: 'sampleuser',
-  name: 'Sample User',
-  email: 'sampleuser@example.com',
-  blogPosts: [
-    { title: 'Sample Blog Post 1', content: 'Lorem ipsum...' },
-    { title: 'Sample Blog Post 2', content: 'Lorem ipsum...' },
-  ],
-};
-
-// Routes
-app.get('/', (req, res) => {
-  res.render('layout', { user: userData }); 
+app.get('/', async (req, res) => {
+    const data = {};
+    data.blogPosts = await mongoose.model('BlogPost').find().populate('author');
+    console.log(data.blogPosts);
+    res.render('index', { data: data });
 });
 
-app.get('/user-profile', (req, res) => {
-  res.render('user-profile', { user: userData });
+app.get('/register', (req, res) => {
+    res.render('register');
 });
 
-app.get('/user-dashboard', (req, res) => {
-  res.render('user-dashboard', { user: userData }); 
+app.get('/login', (req, res) => {
+    res.render('login');
 });
 
-app.get('/blog-create', (req, res) => {
+app.post('/login', async (req, res) => {
+    const User = mongoose.model('User');
+    const user = await User.findOne({ username: req.body.username });
+    if (!user) {
+        res.redirect('/login');
+        return;
+    }
+    if (user.password !== req.body.password) {
+        res.redirect('/login');
+        return;
+    }
+    res.redirect('/');
 });
 
-app.get('/blog-list', (req, res) => {
-  res.render('blog-list', { blogPosts: userData.blogPosts });
-});
-
-app.get('/blog-post', (req, res) => {
-  const blogPostData = { title: 'Sample Blog Post', content: 'Lorem ipsum...' };
-  res.render('blog-post', { blogPost: blogPostData }); // Render the blog-post.hbs template
+app.post('/register', async (req, res) => {
+    const User = mongoose.model('User');
+    const user = new User({
+        username: req.body.username,
+        email: req.body.email,
+        password: req.body.password,
+        name: req.body.firstname + ' ' + req.body.lastname,
+    });
+    await user.save();
+    res.redirect('/');
 });
 
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
-  console.log(`Server is running on port ${PORT}`);
+    console.log(`Server is running on port ${PORT}`);
 });

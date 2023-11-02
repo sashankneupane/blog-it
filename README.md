@@ -40,7 +40,10 @@ An Example Blogpost with Embedded Items:
 ## Wireframes
 
 / - home page
-![home page](documentation/home.jpeg)
+![home page](documentation/home.png)
+
+/register - registration page
+![registration page](documentation/register.png)
 
 /login - login page
 ![login page](documentation/login.jpeg)
