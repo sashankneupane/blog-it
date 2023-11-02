@@ -1,0 +1,15 @@
+{{#with user}}
+<div class="user-profile">
+    <h2>{{username}}'s Profile</h2>
+    <p>Name: {{name}}</p>
+    <p>Email: {{email}}</p>
+    
+    <h3>Your Blog Posts</h3>
+    {{#each blogPosts}}
+    <div class="blog-post">
+        <h4>{{title}}</h4>
+        <p>{{content}}</p>
+    </div>
+    {{/each}}
+</div>
+{{/with}}

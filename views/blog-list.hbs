@@ -1,0 +1,10 @@
+<div class="blog-list">
+    <h2>Blog Posts</h2>
+    {{#each blogPosts}}
+    <div class="blog-post">
+        <h3>{{title}}</h3>
+        <p>{{content}}</p>
+        <a href="/view/{{_id}}">Read More</a>
+    </div>
+    {{/each}}
+</div>
