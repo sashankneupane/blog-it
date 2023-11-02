@@ -1,0 +1,31 @@
+.blog-post {
+    background-color: #fff;
+    border: 1px solid #ddd;
+    padding: 20px;
+    margin: 10px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+h2 {
+    font-size: 24px;
+    margin: 0;
+}
+
+.author {
+    font-style: italic;
+    color: #555;
+    margin-bottom: 10px;
+}
+
+.date-published {
+    color: #888;
+}
+
+.date-updated {
+    color: #888;
+    font-style: italic;
+}
+
+.content {
+    margin-top: 20px;
+}

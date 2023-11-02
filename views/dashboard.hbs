@@ -1,0 +1,41 @@
+<link rel="stylesheet" href="/styles/dashboard.css">
+<div class="dashboard">
+        <header>
+            <h1>Welcome, {{username}}!</h1>
+            <a href="/logout">Log Out</a>
+        </header>
+
+        <section class="widget">
+            <h2>User Stats</h2>
+            <p><strong>Total Blogs: </strong> {{blogCount}}</p>
+            <!-- Add more user statistics here -->
+        </section>
+
+        <section class="widget">
+            <h2>Your Blogs</h2>
+            {{#if userBlogs.length}}
+                <table class="blog-table">
+                    <thead>
+                        <tr>
+                            <th>Title</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {{#each userBlogs}}
+                            <tr>
+                                <td>{{title}}</td>
+                                <td>
+                                    <a href="/edit/{{_id}}">Edit</a>
+                                    <a href="/delete/{{_id}}">Delete</a>
+                                </td>
+                            </tr>
+                        {{/each}}
+                    </tbody>
+                </table>
+            {{else}}
+                <p>No blogs available.</p>
+            {{/if}}
+            <a href="/create-blog" class="create-button">Create New Blog</a>
+        </section>
+    </div>

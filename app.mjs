@@ -3,6 +3,8 @@ import './db.mjs';
 
 import express from 'express';
 import mongoose from 'mongoose';
+import exphbs from 'express-handlebars';
+import moment from 'moment';
 import path from 'path';
 import { fileURLToPath } from 'url';
 
@@ -18,6 +20,11 @@ app.use(express.json());
 app.set('view engine', 'hbs');
 app.set('views', path.resolve(__dirname, 'views'));
 
+const formatDate = (date) => {
+    return moment(date).format('MMMM D, YYYY');
+}
+
+
 app.get('/', async (req, res) => {
     const data = {};
     data.blogPosts = await mongoose.model('BlogPost').find().populate('author');
@@ -27,6 +34,18 @@ app.get('/', async (req, res) => {
 
 app.get('/register', (req, res) => {
     res.render('register');
+});
+
+app.post('/register', async (req, res) => {
+    const User = mongoose.model('User');
+    const user = new User({
+        username: req.body.username,
+        email: req.body.email,
+        password: req.body.password,
+        name: req.body.firstname + ' ' + req.body.lastname,
+    });
+    await user.save();
+    res.redirect('/');
 });
 
 app.get('/login', (req, res) => {
@@ -47,16 +66,35 @@ app.post('/login', async (req, res) => {
     res.redirect('/');
 });
 
-app.post('/register', async (req, res) => {
-    const User = mongoose.model('User');
-    const user = new User({
-        username: req.body.username,
-        email: req.body.email,
-        password: req.body.password,
-        name: req.body.firstname + ' ' + req.body.lastname,
+app.get('/blog-create', (req, res) => {
+    res.render('blog-create');
+});
+
+app.post('/blog-create', async (req, res) => {
+    // get user1
+    const user = await mongoose.model('User').findOne({ username: 'user1' });
+    const BlogPost = mongoose.model('BlogPost');
+    const blogPost = new BlogPost({
+        title: req.body.title,
+        content: req.body.content,
+        author: user._id,
+        publicationDate: Date.now(),
+        lastUpdated: Date.now(),
+        tags: req.body.tags.split(','),
     });
-    await user.save();
+    await blogPost.save();
     res.redirect('/');
+});
+
+app.get('/blog/:id', async (req, res) => {
+    const blogPost = await mongoose.model('BlogPost').findById(req.params.id).populate('author');
+    res.render('blog-post', { blogPost: blogPost });
+});
+
+app.get('/u/:username', async (req, res) => {
+    const user = await mongoose.model('User').findOne({ username: req.params.username });
+    const blogPosts = await mongoose.model('BlogPost').find({ author: user._id });
+    res.render('public-user-blogs', { username: user.username, blogPosts: blogPosts });
 });
 
 const PORT = process.env.PORT || 3000;

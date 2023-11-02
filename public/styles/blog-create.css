@@ -1,0 +1,60 @@
+/* Style for the blog creation page wrapper */
+.blog-create-wrapper {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+/* Header styles */
+.blog-create-wrapper header {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.blog-create-wrapper h1 {
+    font-size: 28px;
+    color: #333;
+}
+
+/* Blog creation form styles */
+.blog-create-form {
+    background-color: #f9f9f9;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.blog-create-form label {
+    display: block;
+    margin-top: 10px;
+    font-weight: bold;
+    color: #333;
+}
+
+.blog-create-form input[type="text"],
+.blog-create-form textarea {
+    width: 100%;
+    padding: 10px;
+    margin: 5px 0;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.blog-create-form textarea {
+    resize: vertical;
+    min-height: 150px;
+}
+
+.blog-create-form input[type="submit"] {
+    background-color: #60afe4;
+    color: #fff;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.blog-create-form input[type="submit"]:hover {
+    background-color: #4ea0d6;
+}

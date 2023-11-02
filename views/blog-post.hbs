@@ -1,6 +1,12 @@
+<link rel="stylesheet" href="/styles/blog-post.css">
 {{#with blogPost}}
 <div class="blog-post">
     <h2>{{title}}</h2>
-    <p>{{content}}</p>
+    <p class="author">Written by <a href="/u/{{author.username}}">{{author.username}}</a></p>
+    <p class="date-published">Published on {{publicationDate}}</p>
+    {{#if updatedDate}}
+        <p class="date-updated">Updated on {{updatedDate}}</p>
+    {{/if}}
+    <p class="content">{{{content}}}</p>
 </div>
 {{/with}}

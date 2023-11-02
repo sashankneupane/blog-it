@@ -51,11 +51,14 @@ An Example Blogpost with Embedded Items:
 /user-profile - user profile page
 ![user profile page](documentation/user-profile.jpeg)
 
-/user-dashboard - user dashboard page
+/dashboard - user dashboard page
 ![user dashboard page](documentation/user-dashboard.jpeg)
 
 /blog-create - blog create page
-![blog create page](documentation/blog-create.jpeg)
+![blog create page](documentation/blog-create.png)
+
+/blog/:blogId - blog post page
+![blog post page](documentation/blog-post.png)
 
 /u/:username - user's public blog page
 ![user profile page](documentation/username.jpeg)

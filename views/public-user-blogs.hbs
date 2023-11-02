@@ -1,0 +1,17 @@
+<link rel="stylesheet" href="/styles/user-blogs.css">
+<div class="user-blogs-wrapper">
+    <h1>{{username}}'s Blogs</h1>
+    {{#if blogPosts.length}}
+        <ul class="blog-list">
+            {{#each blogPosts}}
+                <li class="blog-post">
+                    <a href="/blog/{{_id}}"><h2>{{title}}</h2></a>
+                    <p class="date">Published on {{publicationDate}}</p>
+                    <p>{{content}}</p>
+                </li>
+            {{/each}}
+        </ul>
+    {{else}}
+        <p>No blogs available for this user.</p>
+    {{/if}}
+</div>
