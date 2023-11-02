@@ -1,0 +1,64 @@
+/* Style the "Edit Blog" title */
+h1 {
+    font-size: 24px;
+    color: #333;
+}
+
+/* Style the "Back to Dashboard" link */
+a {
+    color: #0077FF;
+    text-decoration: none;
+}
+
+/* Style the form container */
+form {
+    margin-top: 20px;
+}
+
+/* Style form group (label and input/textarea) */
+.form-group {
+    margin-bottom: 20px;
+}
+
+/* Style form label */
+label {
+    display: block;
+    font-weight: bold;
+}
+
+/* Style form input and textarea */
+input, textarea {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+}
+
+/* Style the form actions (buttons) */
+.form-actions {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 20px;
+}
+
+/* Style the "Update Blog" button */
+button {
+    padding: 10px 20px;
+    background-color: #0077FF;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+/* Style the "Cancel" link */
+.form-actions a {
+    color: #0077FF;
+    text-decoration: none;
+}
+
+/* Define button and link hover effects */
+button:hover, .form-actions a:hover {
+    background-color: #0055CC;
+}

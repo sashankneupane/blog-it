@@ -1,0 +1,75 @@
+/* Style the dashboard container */
+.dashboard {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #fff;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    border-radius: 5px;
+}
+
+/* Style the header section */
+header {
+    text-align: right;
+}
+
+/* Style the "User Stats" and "Your Blogs" sections */
+.widget {
+    margin-bottom: 20px;
+}
+
+.widget h2 {
+    font-size: 24px;
+    color: #333;
+    margin-bottom: 10px;
+}
+
+.widget p {
+    font-size: 16px;
+    margin-bottom: 20px;
+}
+
+/* Style the user statistics */
+.widget p strong {
+    font-weight: bold;
+}
+
+/* Style the blog table */
+.blog-table {
+    width: 100%;
+    border-collapse: collapse;
+    border: 1px solid #ddd;
+}
+
+.blog-table th, .blog-table td {
+    padding: 10px;
+    border: 1px solid #ddd;
+    text-align: left;
+}
+
+.blog-table th {
+    background-color: #f5f5f5;
+    font-weight: bold;
+}
+
+/* Style the "Edit" and "Delete" links in the table */
+.blog-table td a {
+    text-decoration: none;
+    margin-right: 10px;
+    color: #0077FF;
+}
+
+/* Style the "Create New Blog" button */
+.create-button {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #0077FF;
+    color: #fff;
+    text-decoration: none;
+    border-radius: 5px;
+    margin-top: 20px;
+}
+
+.create-button:hover {
+    background-color: #0055CC;
+}

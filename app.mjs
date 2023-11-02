@@ -3,7 +3,6 @@ import './db.mjs';
 
 import express from 'express';
 import mongoose from 'mongoose';
-import exphbs from 'express-handlebars';
 import moment from 'moment';
 import path from 'path';
 import { fileURLToPath } from 'url';
@@ -66,11 +65,11 @@ app.post('/login', async (req, res) => {
     res.redirect('/');
 });
 
-app.get('/blog-create', (req, res) => {
-    res.render('blog-create');
+app.get('/create-blog', (req, res) => {
+    res.render('create-blog');
 });
 
-app.post('/blog-create', async (req, res) => {
+app.post('/create-blog', async (req, res) => {
     // get user1
     const user = await mongoose.model('User').findOne({ username: 'user1' });
     const BlogPost = mongoose.model('BlogPost');
@@ -95,6 +94,37 @@ app.get('/u/:username', async (req, res) => {
     const user = await mongoose.model('User').findOne({ username: req.params.username });
     const blogPosts = await mongoose.model('BlogPost').find({ author: user._id });
     res.render('public-user-blogs', { username: user.username, blogPosts: blogPosts });
+});
+
+app.get('/dashboard', async (req, res) => {
+    const user = await mongoose.model('User').findOne({ username: 'user1' });
+    const blogPosts = await mongoose.model('BlogPost').find({ author: user._id });
+    res.render('dashboard', { 
+        username: user.username,
+        userBlogs: blogPosts,
+        
+    });
+});
+
+app.get('/blog/:id/edit', async (req, res) => {
+    const blogPost = await mongoose.model('BlogPost').findById(req.params.id);
+    res.render('blog-edit', { blogPost: blogPost });
+});
+
+app.post('/blog/:id/edit', async (req, res) => {
+    const blogPost = await mongoose.model('BlogPost').findById(req.params.id);
+    blogPost.title = req.body.title;
+    blogPost.content = req.body.content;
+    blogPost.lastUpdated = Date.now();
+    blogPost.tags = req.body.tags.split(',');
+    await blogPost.save();
+    res.redirect('/blog/' + req.params.id);
+});
+
+app.get('/blog/:id/delete', async (req, res) => {
+    const BlogPost = mongoose.model('BlogPost');
+    await BlogPost.deleteOne({_id: req.params.id});
+    res.redirect('/dashboard');
 });
 
 const PORT = process.env.PORT || 3000;

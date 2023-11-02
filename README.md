@@ -46,13 +46,10 @@ An Example Blogpost with Embedded Items:
 ![registration page](documentation/register.png)
 
 /login - login page
-![login page](documentation/login.jpeg)
-
-/user-profile - user profile page
-![user profile page](documentation/user-profile.jpeg)
+![login page](documentation/login.png)
 
 /dashboard - user dashboard page
-![user dashboard page](documentation/user-dashboard.jpeg)
+![user dashboard page](documentation/dashboard.png)
 
 /blog-create - blog create page
 ![blog create page](documentation/blog-create.png)
@@ -60,8 +57,11 @@ An Example Blogpost with Embedded Items:
 /blog/:blogId - blog post page
 ![blog post page](documentation/blog-post.png)
 
+/blog/:blogId/edit - blog edit page
+![blog edit page](documentation/blog-edit.png)
+
 /u/:username - user's public blog page
-![user profile page](documentation/username.jpeg)
+![user profile page](documentation/username.png)
 
 
 ## Site map

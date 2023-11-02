@@ -1,41 +1,41 @@
 <link rel="stylesheet" href="/styles/dashboard.css">
 <div class="dashboard">
-        <header>
-            <h1>Welcome, {{username}}!</h1>
-            <a href="/logout">Log Out</a>
-        </header>
+    <header>
+        <h1>Welcome, {{username}}!</h1>
+        <a href="/logout">Log Out</a>
+    </header>
 
-        <section class="widget">
-            <h2>User Stats</h2>
-            <p><strong>Total Blogs: </strong> {{blogCount}}</p>
-            <!-- Add more user statistics here -->
-        </section>
+    <section class="widget">
+        <h2>User Stats</h2>
+        <p><strong>Total Blogs: </strong> {{userBlogs.length}}</p>
+        <!-- Add more user statistics here -->
+    </section>
 
-        <section class="widget">
-            <h2>Your Blogs</h2>
-            {{#if userBlogs.length}}
-                <table class="blog-table">
-                    <thead>
+    <section class="widget">
+        <h2>Your Blogs</h2>
+        {{#if userBlogs.length}}
+            <table class="blog-table">
+                <thead>
+                    <tr>
+                        <th>Title</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {{#each userBlogs}}
                         <tr>
-                            <th>Title</th>
-                            <th>Actions</th>
+                            <td><a href="/blog/{{_id}}">{{title}}</a></td>
+                            <td>
+                                <a href="/blog/{{_id}}/edit">Edit</a>
+                                <a href="/blog/{{_id}}/delete">Delete</a>
+                            </td>
                         </tr>
-                    </thead>
-                    <tbody>
-                        {{#each userBlogs}}
-                            <tr>
-                                <td>{{title}}</td>
-                                <td>
-                                    <a href="/edit/{{_id}}">Edit</a>
-                                    <a href="/delete/{{_id}}">Delete</a>
-                                </td>
-                            </tr>
-                        {{/each}}
-                    </tbody>
-                </table>
-            {{else}}
-                <p>No blogs available.</p>
-            {{/if}}
-            <a href="/create-blog" class="create-button">Create New Blog</a>
-        </section>
-    </div>
+                    {{/each}}
+                </tbody>
+            </table>
+        {{else}}
+            <p>No blogs available.</p>
+        {{/if}}
+        <a href="/create-blog" class="create-button">Create New Blog</a>
+    </section>
+</div>
