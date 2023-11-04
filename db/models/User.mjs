@@ -1,0 +1,36 @@
+import mongoose from 'mongoose';
+
+const userSchema = new mongoose.Schema({
+    username: {
+      type: String,
+      unique: true,
+      required: true,
+    },
+    email: {
+      type: String,
+      unique: true,
+      required: true,
+    },
+    password: {
+      type: String,
+      required: true,
+    },
+    name: {
+      type: String,
+    },
+    blogPosts: [
+      {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'BlogPost',
+      },
+    ],
+});
+
+let User;
+if (mongoose.models.User) {
+    User = mongoose.model('User');
+} else {
+    User = mongoose.model('User', userSchema);
+}
+
+export default User;
