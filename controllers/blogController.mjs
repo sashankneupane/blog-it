@@ -11,7 +11,9 @@ async function getUserByID(id) {
 
 
 export async function getWriteBlogPage(req, res) {
-    res.render('write');
+    res.render('write', {
+        user: req.user,
+    });
 }
 
 export async function writeBlogPost(req, res) {
@@ -37,8 +39,10 @@ export async function getBlogPageById(req, res) {
         for (const comment of blogPost.comments) {
             comment.author = await getUserByID(comment.author);
         }
-
-        res.render('blog-post', { blogPost });
+        res.render('blog-post', { 
+            blogPost: blogPost,
+            user: req.user, 
+        });
     } catch (error) {
         console.error('Error:', error);
         res.status(500).send('Internal Server Error');
@@ -48,7 +52,10 @@ export async function getBlogPageById(req, res) {
 
 export async function getBlogEditPageById(req, res) {
     const blogPost = await getBlogPostById(req.params.blogId);
-    res.render('blog-edit', { blogPost: blogPost });
+    res.render('blog-edit', { 
+        blogPost: blogPost,
+        user: req.user,
+    });
 }
 
 
@@ -59,7 +66,6 @@ export async function editBlogPostById(req, res) {
         lastUpdated: Date.now(),
         tags: req.body.tags.split(','),
     };
-
     try {
         const result = await BlogPost.findByIdAndUpdate(
             req.params.blogId,

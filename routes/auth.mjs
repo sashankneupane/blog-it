@@ -4,6 +4,7 @@ import {
     getLoginPage,
     registerUser,
     loginUser,
+    logout,
 } from '../controllers/authController.mjs';
 
 const router = express.Router();
@@ -15,5 +16,8 @@ router.post('/register', registerUser);
 // LOGIN Page
 router.get('/login', getLoginPage);
 router.post('/login', loginUser);
+
+// LOGOUT Page
+router.get('/logout', logout);
 
 export default router;

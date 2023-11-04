@@ -7,7 +7,10 @@ async function getBlogPosts(query) {
 export async function getHomePage(req, res) {
     const data = {};
     data.blogPosts = await getBlogPosts({});
-    res.render('home', { data: data });
+    res.render('home', { 
+        data: data,
+        user: req.user, 
+    });
 }
 
 export async function redirectToHomePage(req, res) {

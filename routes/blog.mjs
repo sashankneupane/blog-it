@@ -7,21 +7,22 @@ import {
     editBlogPostById,
     deleteBlogPostById,
 } from '../controllers/blogController.mjs';
+import { ensureAuthentication, ensureOwnership } from '../middlewares/auth.mjs';
 
 const router = express.Router();
 
 // Page to write a new blog post
-router.get('/write', getWriteBlogPage);
-router.post('/write', writeBlogPost);
+router.get('/write', ensureAuthentication, getWriteBlogPage);
+router.post('/write', ensureAuthentication, writeBlogPost);
 
 // Page to view a single blog post
 router.get('/:blogId', getBlogPageById);
 
 // Page to edit a blog post
-router.get('/:blogId/edit', getBlogEditPageById);
-router.post('/:blogId/edit', editBlogPostById);
+router.get('/:blogId/edit', ensureOwnership, getBlogEditPageById);
+router.post('/:blogId/edit', ensureOwnership, editBlogPostById);
 
 // DELETE a blog post
-router.get('/:blogId/delete', deleteBlogPostById);
+router.get('/:blogId/delete', ensureOwnership, deleteBlogPostById);
 
 export default router;

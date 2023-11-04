@@ -1,3 +1,4 @@
+import passport from 'passport';
 import User from '../db/models/User.mjs';
 
 async function getUserByUsername(username) {
@@ -5,11 +6,15 @@ async function getUserByUsername(username) {
 }
 
 export async function getRegisterPage(req, res) {
-    res.render('register');
+    res.render('register', {
+        user: req.user,
+    });
 }
 
 export async function getLoginPage(req, res) {
-    res.render('login');
+    res.render('login', {
+        user: req.user,
+    });
 }
 
 export async function registerUser(req, res) {
@@ -24,15 +29,30 @@ export async function registerUser(req, res) {
     res.redirect('/');
 }
 
-export async function loginUser(req, res) {
-    const user = await getUserByUsername(req.body.username);
-    if (!user) {
-        res.redirect('/auth/login');
-        return;
-    }
-    if (user.password !== req.body.password) {
-        res.redirect('/auth/login');
-        return;
-    }
-    res.redirect('/');
+export async function loginUser(req, res, next) {
+    passport.authenticate('local', (err, user, info) => {
+        if (err) {
+            console.error('Error:', err);
+            return next(err);
+        }
+        if (!user) {
+            return res.redirect('/auth/login?message=Incorrect+Credentials');
+        }
+        req.logIn(user, (err) => {
+            if (err) {
+                console.error('Error:', err);
+                return next(err);
+            }
+            return res.redirect('/home?message=successfully+logged+in');
+        });
+    })(req, res, next);
+}
+
+export function logout(req, res) {
+    req.logout(function(err) {
+        if (err) { 
+            return next(err); 
+        }
+        res.redirect('/');
+    });
 }

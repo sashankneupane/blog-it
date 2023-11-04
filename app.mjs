@@ -5,6 +5,9 @@ import './db/index.mjs';
 
 const app = express();
 
+import {setPassportStrategies} from './middlewares/auth.mjs';
+setPassportStrategies(app);
+
 import setCommonMiddlewares from './middlewares/commonMiddlewares.mjs';
 setCommonMiddlewares(app);
 
