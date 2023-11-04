@@ -50,13 +50,3 @@ export function ensureAuthentication(req, res, next) {
     }
     res.redirect('/home');
 }
-
-export async function ensureOwnership(req, res, next) {
-    if (req.isAuthenticated()) {
-        const blogPost = await getBlogPostById(req.params.blogId);
-        if (req.user._id.toString() === blogPost.author.toString()) {
-            return next();
-        }
-    }
-    res.redirect('/home');
-}

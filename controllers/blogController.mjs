@@ -1,5 +1,6 @@
 import User from '../db/models/User.mjs';
 import BlogPost from '../db/models/Blogpost.mjs';
+import Tag from '../db/models/Tag.mjs';
 
 async function getBlogPostById(id) {
     return await BlogPost.findById(id)
@@ -7,14 +8,25 @@ async function getBlogPostById(id) {
 
 async function getUserByID(id) {
     return await User.findById(id);
-}
+};
 
+export async function ensureOwnership(req, res, next) {
+    if (req.isAuthenticated()) {
+        const blogPost = await getBlogPostById(req.params.blogId);
+        if (blogPost && req.user._id.toString() === blogPost.author.toString()) {
+            return next();
+        }
+    }
+    if (req.isAuthenticated()) {
+        res.redirect('/u/dashboard');
+    } else {
+        res.redirect('/auth/login');
+    }
+};
 
 export async function getWriteBlogPage(req, res) {
-    res.render('write', {
-        user: req.user,
-    });
-}
+    res.render('write');
+};
 
 export async function writeBlogPost(req, res) {
     const user = await User.findOne({ username: 'user1' });
@@ -47,7 +59,7 @@ export async function getBlogPageById(req, res) {
         console.error('Error:', error);
         res.status(500).send('Internal Server Error');
     }
-}
+};
 
 
 export async function getBlogEditPageById(req, res) {
@@ -56,7 +68,7 @@ export async function getBlogEditPageById(req, res) {
         blogPost: blogPost,
         user: req.user,
     });
-}
+};
 
 
 export async function editBlogPostById(req, res) {
@@ -66,6 +78,17 @@ export async function editBlogPostById(req, res) {
         lastUpdated: Date.now(),
         tags: req.body.tags.split(','),
     };
+    updatedFields.tags = updatedFields.tags.map((tag) => {
+        tag = tag.trim();
+        try {
+            const tagObj = Tag.findOne({ name: tag });
+            return tagObj._id;
+        } catch (error) {
+            const newTag = new Tag({ name: tag });
+            newTag.save();
+            return newTag._id;
+        }
+    });
     try {
         const result = await BlogPost.findByIdAndUpdate(
             req.params.blogId,
@@ -82,7 +105,7 @@ export async function editBlogPostById(req, res) {
         console.error('Error updating blog post:', error);
         res.status(500).send('Internal Server Error');
     }
-}
+};
 
 
 export async function deleteBlogPostById(req, res) {
@@ -97,4 +120,4 @@ export async function deleteBlogPostById(req, res) {
         console.error('Error deleting blog post:', error);
         res.status(500).send('Internal Server Error');
     }
-}
+};

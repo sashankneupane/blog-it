@@ -6,8 +6,9 @@ import {
     getBlogEditPageById,
     editBlogPostById,
     deleteBlogPostById,
+    ensureOwnership,
 } from '../controllers/blogController.mjs';
-import { ensureAuthentication, ensureOwnership } from '../middlewares/auth.mjs';
+import { ensureAuthentication } from '../middlewares/auth.mjs';
 
 const router = express.Router();
 
