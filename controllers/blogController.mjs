@@ -1,5 +1,3 @@
-import mongoose from 'mongoose';
-
 import BlogPost from '../db/models/Blogpost.mjs';
 
 async function getBlogPostById(id) {

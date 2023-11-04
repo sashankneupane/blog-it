@@ -2,10 +2,7 @@ import mongoose from 'mongoose';
 
 const dbURL = process.env.DSN;
 
-mongoose.connect(dbURL, {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
-});
+mongoose.connect(dbURL);
 
 const db = mongoose.connection;
 

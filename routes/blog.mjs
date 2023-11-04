@@ -1,9 +1,4 @@
 import express from 'express';
-
-import BlogPost from '../db/models/Blogpost.mjs';
-import User from '../db/models/User.mjs';
-import Tag from '../db/models/Tag.mjs';
-
 import { 
     getWriteBlogPage,
     writeBlogPost,
