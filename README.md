@@ -40,33 +40,33 @@ An Example Blogpost with Embedded Items:
 ## Wireframes
 
 / - home page
-![home page](documentation/home.png)
+![home page](public/documentation/home.png)
 
 /register - registration page
-![registration page](documentation/register.png)
+![registration page](public/documentation/register.png)
 
 /login - login page
-![login page](documentation/login.png)
+![login page](public/documentation/login.png)
 
 /dashboard - user dashboard page
-![user dashboard page](documentation/dashboard.png)
+![user dashboard page](public/documentation/dashboard.png)
 
 /blog-create - blog create page
-![blog create page](documentation/blog-create.png)
+![blog create page](public/documentation/blog-create.png)
 
 /blog/:blogId - blog post page
-![blog post page](documentation/blog-post.png)
+![blog post page](public/documentation/blog-post.png)
 
 /blog/:blogId/edit - blog edit page
-![blog edit page](documentation/blog-edit.png)
+![blog edit page](public/documentation/blog-edit.png)
 
 /u/:username - user's public blog page
-![user profile page](documentation/username.png)
+![user profile page](public/documentation/username.png)
 
 
 ## Site map
 
-![site map](documentation/site-map.jpeg)
+![site map](public/documentation/site-map.jpeg)
 
 ## User Stories or Use Cases
 
