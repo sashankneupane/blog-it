@@ -14,6 +14,6 @@ router.post('/register', registerUser);
 
 // LOGIN Page
 router.get('/login', getLoginPage);
-router.post('logic', loginUser);
+router.post('/login', loginUser);
 
 export default router;

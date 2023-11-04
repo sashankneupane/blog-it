@@ -8,12 +8,16 @@
         <p class="date-updated">Updated on {{updatedDate}}</p>
     {{/if}}
     <p class="content">{{content}}</p>
-    {{#if blogPost.comments.length}}
-        <h3>Comments:</h3>
+    
+    {{likes.length}} Likes {{comments.length}} Comments
+
+    {{#if comments.length}}
         <ul class="comment-list">
-            {{#each blogPost.comments}}
+            {{#each comments}}
                 <li class="comment">
-                    <p class="comment-author">{{author.username}} on {{date}}</p>
+                    <div class="comment-header">
+                        <p class="comment-author">{{author.username}}</p>
+                    </div>
                     <p class="comment-text">{{text}}</p>
                 </li>
             {{/each}}

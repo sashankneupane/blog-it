@@ -26,6 +26,30 @@ h2 {
     font-style: italic;
 }
 
-.content {
-    margin-top: 20px;
+.comment-list {
+    display: flex;
+    flex-direction: column;
+}
+
+.comment {
+    border: 1px solid #eee;
+    padding: 5px;
+}
+
+.comment-header {
+    align-items: center;
+}
+
+.comment-author {
+    font-weight: bold;
+    color: #333;
+    margin: 0;
+}
+
+.comment-date {
+    color: #888;
+}
+
+.comment-text {
+    margin-top: 10px;
 }

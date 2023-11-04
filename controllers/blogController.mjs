@@ -1,9 +1,13 @@
+import User from '../db/models/User.mjs';
 import BlogPost from '../db/models/Blogpost.mjs';
 
 async function getBlogPostById(id) {
-    const blogPost = await BlogPost.findById(id).populate('author');
-    return blogPost;
+    return await BlogPost.findById(id)
 };
+
+async function getUserByID(id) {
+    return await User.findById(id);
+}
 
 
 export async function getWriteBlogPage(req, res) {
@@ -27,8 +31,18 @@ export async function writeBlogPost(req, res) {
 
 
 export async function getBlogPageById(req, res) {
-    const blogPost = await getBlogPostById(req.params.blogId);
-    res.render('blog-post', { blogPost: blogPost });
+    try {
+        const blogPost = await getBlogPostById(req.params.blogId);
+        blogPost.author = await getUserByID(blogPost.author);
+        for (const comment of blogPost.comments) {
+            comment.author = await getUserByID(comment.author);
+        }
+
+        res.render('blog-post', { blogPost });
+    } catch (error) {
+        console.error('Error:', error);
+        res.status(500).send('Internal Server Error');
+    }
 }
 
 

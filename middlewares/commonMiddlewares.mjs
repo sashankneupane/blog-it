@@ -1,4 +1,5 @@
 import express from 'express';
+import Handlebars from 'handlebars';
 import path from 'path';
 import { fileURLToPath } from 'url';
 
@@ -13,6 +14,7 @@ export default function setCommonMiddlewares(app) {
     app.use(express.urlencoded({ extended: false }));
     app.use(express.json());
 
+    
     app.set('view engine', 'hbs');
     app.set('views', path.resolve(__dirname, 'views'));
 }

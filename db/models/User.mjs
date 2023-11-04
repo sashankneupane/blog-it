@@ -18,12 +18,6 @@ const userSchema = new mongoose.Schema({
     name: {
       type: String,
     },
-    blogPosts: [
-      {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'BlogPost',
-      },
-    ],
 });
 
 let User;

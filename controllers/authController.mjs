@@ -25,13 +25,13 @@ export async function registerUser(req, res) {
 }
 
 export async function loginUser(req, res) {
-    const user = getUserByUsername(req.body.username);
+    const user = await getUserByUsername(req.body.username);
     if (!user) {
-        res.redirect('/login');
+        res.redirect('/auth/login');
         return;
     }
     if (user.password !== req.body.password) {
-        res.redirect('/login');
+        res.redirect('/auth/login');
         return;
     }
     res.redirect('/');
