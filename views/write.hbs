@@ -6,15 +6,25 @@
     <div class="blog-create-form">
         <form action="/blog/write" method="post">
             <label for="title">Title</label>
-            <input type="text" name="title" id="title" placeholder="Enter the title of your blog" required>
+            <input id="write-blog-title" type="text" name="title" id="title" placeholder="Enter the title of your blog" required>
 
             <label for="content">Content</label>
-            <textarea name="content" id="content" placeholder="Write your blog content" rows="8" required></textarea>
+            <textarea 
+                id="write-blog-content" 
+                name="content" 
+                id="content" 
+                placeholder="Write your blog content" 
+                rows="8" required>
+            </textarea>
 
             <label for="tags">Tags</label>
-            <input type="text" name="tags" id="tags" placeholder="Add tags (comma-separated)">
+            <input 
+                type="text" 
+                name="tags" 
+                id="write-blog-tags" 
+                placeholder="Add tags (comma-separated)">
 
-            <button type="submit">Create Blog</button>
+            <button id="write-blog-submit" type="submit">Create Blog</button>
         </form>
     </div>
 </div>

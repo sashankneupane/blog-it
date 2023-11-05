@@ -1,75 +1,84 @@
-/* Style the dashboard container */
 .dashboard {
-    max-width: 800px;
-    margin: 0 auto;
-    padding: 20px;
     background-color: #fff;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    border-radius: 5px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    padding: 20px;
+    margin: 20px;
+    min-width: 800px;
 }
 
-/* Style the header section */
-header {
-    text-align: right;
+h1 {
+    font-weight: normal;
+    font-size: 36px;
+    margin: 10px 0;
 }
 
-/* Style the "User Stats" and "Your Blogs" sections */
+a {
+    color: #fff;
+    text-decoration: none;
+    margin: 0 10px;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
 .widget {
-    margin-bottom: 20px;
+    margin-top: 20px;
 }
 
-.widget h2 {
+h2 {
     font-size: 24px;
-    color: #333;
-    margin-bottom: 10px;
+    margin: 10px 0;
 }
 
-.widget p {
-    font-size: 16px;
-    margin-bottom: 20px;
-}
-
-/* Style the user statistics */
-.widget p strong {
+strong {
     font-weight: bold;
 }
 
-/* Style the blog table */
+.widget p {
+    margin: 10px 0;
+}
+
+/* Style the table */
 .blog-table {
     width: 100%;
     border-collapse: collapse;
-    border: 1px solid #ddd;
 }
 
 .blog-table th, .blog-table td {
-    padding: 10px;
     border: 1px solid #ddd;
+    padding: 10px;
     text-align: left;
 }
 
 .blog-table th {
-    background-color: #f5f5f5;
-    font-weight: bold;
-}
-
-/* Style the "Edit" and "Delete" links in the table */
-.blog-table td a {
-    text-decoration: none;
-    margin-right: 10px;
-    color: #0077FF;
-}
-
-/* Style the "Create New Blog" button */
-.create-button {
-    display: inline-block;
-    padding: 10px 20px;
-    background-color: #0077FF;
+    background-color: #0077b6;
     color: #fff;
+}
+
+.blog-table td a {
+    color: #0077b6;
     text-decoration: none;
+    margin: 0 10px;
+}
+
+.blog-table td a:hover {
+    text-decoration: underline;
+}
+
+.create-button {
+    display: block;
+    width: 200px;
+    background-color: #0077b6;
+    color: #fff;
+    text-align: center;
+    padding: 10px;
+    margin: 20px auto;
     border-radius: 5px;
-    margin-top: 20px;
+    text-decoration: none;
 }
 
 .create-button:hover {
-    background-color: #0055CC;
+    background-color: #005f8d;
 }

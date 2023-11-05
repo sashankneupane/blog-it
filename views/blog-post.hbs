@@ -9,14 +9,14 @@
     {{/if}}
     <p class="content">{{content}}</p>
     
-    {{likes.length}} Likes {{comments.length}} Comments
+    {{likes.length}} <img src="/img/like.png" height="20px" width="20px"> {{comments.length}} <img src="/img/comment.png" height="20px" width="20px">
 
     {{#if comments.length}}
         <ul class="comment-list">
             {{#each comments}}
                 <li class="comment">
                     <div class="comment-header">
-                        <p class="comment-author">{{author.username}}</p>
+                        <p class="comment-author"><a href="/u/{{author.username}}">{{author.username}}</a></p>
                     </div>
                     <p class="comment-text">{{text}}</p>
                 </li>

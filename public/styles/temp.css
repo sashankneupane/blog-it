@@ -1,0 +1,75 @@
+nav {
+    background-color: #fff; /* White background for the navigation bar */
+    border-bottom: 1px solid #000; /* Black border at the bottom of the navigation bar */
+    padding: 5px;
+    display: flex;
+	max-width: 100%;
+    align-items: center;
+	justify-content: space-between;
+}
+
+nav a {
+    color: #000; /* Black text color for links */
+    text-decoration: none;
+}
+
+nav a:hover {
+    text-decoration: underline; /* Underline links on hover */
+}
+
+nav ul {
+    list-style: none;
+    display: flex;
+}
+
+nav ul li {
+    margin: 0 15px;
+}
+
+footer {
+    background-color: #fff; /* White background for the footer */
+    border-top: 1px solid #000; /* Black border at the top of the footer */
+    color: #000; /* Black text color for the footer */
+    text-align: center;
+    padding: 10px;
+}
+
+/* Additional CSS for styling links, headings, and setting max width */
+#content {
+    width: 100%;
+    display: flex;
+	flex-direction: column;
+	align-items: center;
+}
+
+.blog-card {
+	width: 80%;
+    margin: 20px auto;
+    display: flex;
+    flex-direction: column;
+	border-radius: 5px;
+	padding: 20px;
+	background-color: #fff; /* White background */
+	border: 1px solid #ddd; /* Light grey border */
+	box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Add a subtle shadow */
+}
+
+.blog-card h2 a {
+    color: #000; /* Black text color for links */
+    text-decoration: none;
+}
+
+.blog-card h2 a:hover {
+    text-decoration: underline; /* Underline links on hover */
+}
+
+.blog-card p {
+    line-height: 1.6;
+}
+
+/* Media query to adjust layout for smaller screens */
+@media (max-width: 768px) {
+    .blog-card {
+        width: calc(50% - 20px); /* Two cards in a row on smaller screens */
+    }
+}

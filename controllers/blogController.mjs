@@ -29,7 +29,7 @@ export async function getWriteBlogPage(req, res) {
 };
 
 export async function writeBlogPost(req, res) {
-    const user = await User.findOne({ username: 'user1' });
+    const user = await getUserByID(req.user._id);
     const blogPost = new BlogPost({
         title: req.body.title,
         content: req.body.content,
@@ -112,7 +112,7 @@ export async function deleteBlogPostById(req, res) {
     try {
         const result = await BlogPost.findByIdAndDelete(req.params.blogId);
         if (result) {
-            res.redirect('/dashboard');
+            res.redirect('/u/dashboard');
         } else {
             res.status(404).send('Blog post not found.');
         }

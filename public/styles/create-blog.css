@@ -1,60 +1,42 @@
-/* Style for the blog creation page wrapper */
 .blog-create-wrapper {
-    max-width: 800px;
-    margin: 0 auto;
+    margin: 20px auto;
     padding: 20px;
+    background-color: #fff; /* White background */
+    border: 1px solid #ddd; /* Light grey border */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Add a subtle shadow */
+    width: 80%;
 }
 
-/* Header styles */
-.blog-create-wrapper header {
-    text-align: center;
-    margin-bottom: 20px;
-}
-
-.blog-create-wrapper h1 {
-    font-size: 28px;
-    color: #333;
-}
-
-/* Blog creation form styles */
 .blog-create-form {
-    background-color: #f9f9f9;
-    padding: 20px;
-    border-radius: 5px;
-    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
 }
 
-.blog-create-form label {
-    display: block;
-    margin-top: 10px;
+label {
     font-weight: bold;
-    color: #333;
+    margin-top: 15px;
 }
 
-.blog-create-form input[type="text"],
-.blog-create-form textarea {
+#write-blog-title,
+#write-blog-tags,
+#write-blog-content {
     width: 100%;
-    padding: 10px;
-    margin: 5px 0;
-    border: 1px solid #ccc;
+    padding: 15px; /* Increase padding to add space within input fields */
+    margin: 10px 0; /* Increase margin to separate input fields */
+    border: 1px solid #ddd; /* Light grey border */
     border-radius: 5px;
 }
 
-.blog-create-form textarea {
-    resize: vertical;
-    min-height: 150px;
-}
-
-.blog-create-form input[type="submit"] {
-    background-color: #60afe4;
-    color: #fff;
-    padding: 10px 20px;
+#write-blog-submit {
+    background-color: #000; /* Black background for the button */
+    color: #fff; /* White text color for the button */
+    padding: 15px; /* Increase padding to add space within the button */
     border: none;
     border-radius: 5px;
     cursor: pointer;
-    transition: background-color 0.3s;
+    margin-top: 20px; /* Increase margin to separate the button */
 }
 
-.blog-create-form input[type="submit"]:hover {
-    background-color: #4ea0d6;
+#write-blog-submit:hover {
+    background-color: #333; /* Slightly darker background on hover */
 }

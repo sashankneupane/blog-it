@@ -1,64 +1,75 @@
-/* Style the "Edit Blog" title */
+.edit-blog {
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    padding: 20px;
+    margin: 20px;
+    min-width: 800px;
+}
+
+
 h1 {
-    font-size: 24px;
-    color: #333;
+    font-weight: normal;
+    font-size: 36px;
+    margin: 10px 0;
 }
 
-/* Style the "Back to Dashboard" link */
 a {
-    color: #0077FF;
+    color: #fff;
     text-decoration: none;
+    margin: 0 10px;
 }
 
-/* Style the form container */
+a:hover {
+    text-decoration: underline;
+}
+
 form {
     margin-top: 20px;
 }
 
-/* Style form group (label and input/textarea) */
 .form-group {
-    margin-bottom: 20px;
+    margin: 10px 0;
 }
 
-/* Style form label */
 label {
-    display: block;
     font-weight: bold;
 }
 
-/* Style form input and textarea */
-input, textarea {
+input[type="text"],
+textarea {
     width: 100%;
+    margin-top: 5px;
     padding: 10px;
-    border: 1px solid #ddd;
-    border-radius: 5px;
+    font-size: 16px;
 }
 
-/* Style the form actions (buttons) */
 .form-actions {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+    text-align: center;
     margin-top: 20px;
 }
 
-/* Style the "Update Blog" button */
-button {
-    padding: 10px 20px;
-    background-color: #0077FF;
+button[type="submit"] {
+    background-color: #0077b6;
     color: #fff;
+    padding: 10px 20px;
     border: none;
     border-radius: 5px;
     cursor: pointer;
+    font-size: 16px;
 }
 
-/* Style the "Cancel" link */
-.form-actions a {
-    color: #0077FF;
+button[type="submit"]:hover {
+    background-color: #005f8d;
+}
+
+a[href="/dashboard"] {
+    color: #0077b6;
     text-decoration: none;
+    font-weight: bold;
+    margin: 0 10px;
 }
 
-/* Define button and link hover effects */
-button:hover, .form-actions a:hover {
-    background-color: #0055CC;
+a[href="/dashboard"]:hover {
+    text-decoration: underline;
 }

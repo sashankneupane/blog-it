@@ -1,6 +1,6 @@
 /* Style for the registration form */
 .register-form-wrapper {
-    max-width: 400px;
+    width: 40%; 
     margin: 0 auto;
     padding: 20px;
     background-color: #ffffff;
