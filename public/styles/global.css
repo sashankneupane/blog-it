@@ -14,6 +14,12 @@ button:focus {
 	outline: none;
 }
 
+/* Reset ul default styles globally */
+ul {
+	list-style: none;
+	padding: 0px;
+	margin: 0px;
+}
 
 /* Reset some default styles and set some basic styling */
 nav {

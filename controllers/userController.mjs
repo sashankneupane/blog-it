@@ -24,7 +24,6 @@ export async function getDashboardPage(req, res) {
             userBlogs: blogPosts, 
             user: req.user,
         });
-    
     } else {
         res.redirect('/auth/login');
     }

@@ -1,40 +1,70 @@
 <link rel="stylesheet" href="/styles/dashboard.css">
-<div class="dashboard">
-    <header>
-        <h1>Welcome, {{username}}!</h1>
-        <a href="/auth/logout">Log Out</a>
-    </header>
 
-    <section class="widget">
-        <h2>User Stats</h2>
-        <p><strong>Total Blogs: </strong> {{userBlogs.length}}</p>
+<div class="dashboard-wrapper">
+    <section class="sidebar">
+        {{#with user}}
+            <div class="top-sidebar">
+                <img src="/img/nav/myprofile.jpeg" alt="profile-picture">
+                <span class="username">{{username}}</span>
+                <ul>
+                    <li class="dashboard-choice">
+                        Dashboard
+                    </li>
+                    <li class="dashboard-choice">
+                        Blogs
+                    </li>
+                    <li class="dashboard-choice">
+                        Analytics
+                    </li>
+                </ul>
+            </div>
+
+            <div class="bottom-sidebar">
+                <ul>
+                    <li class="dashboard-choice">
+                        Settings
+                    </li>
+                    <li class="dashboard-choice">
+                        Logout
+                    </li>
+                </ul>
+            </div>
+
+        {{/with}}
     </section>
+    
 
-    <section class="widget">
-        <h2>Your Blogs</h2>
-        {{#if userBlogs.length}}
-            <table class="blog-table">
-                <thead>
-                    <tr>
-                        <th>Title</th>
-                        <th>Actions</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {{#each userBlogs}}
+    <section class="blog-dashboard">
+        <section class="widget">
+            <h2>User Stats</h2>
+            <p><strong>Total Blogs: </strong><span id="total-blogs">{{userBlogs.length}}</span></p>
+        </section>
+        <section class="blogs-widget">
+            <h2>Your Blogs</h2>
+            {{#if userBlogs.length}}
+                <table class="blog-table">
+                    <thead>
                         <tr>
-                            <td><a href="/blog/{{_id}}">{{title}}</a></td>
-                            <td>
-                                <a href="/blog/{{_id}}/edit"><img src='/img/edit.png' height="20px" width="20px"></a>
-                                <a href="/blog/{{_id}}/delete"><img src='/img/delete.png' height="20px" width="20px"></a>
-                            </td>
+                            <th>Title</th>
+                            <th>Actions</th>
                         </tr>
-                    {{/each}}
-                </tbody>
-            </table>
-        {{else}}
-            <p>No blogs available.</p>
-        {{/if}}
-        <a href="/blog/write" class="create-button">Create New Blog</a>
+                    </thead>
+                    <tbody>
+                        {{#each userBlogs}}
+                            <tr>
+                                <td><a href="/blog/{{_id}}">{{title}}</a></td>
+                                <td>
+                                    <a href="/blog/{{_id}}/edit" class="edit-button">Edit</a>
+                                    <a href="/blog/{{_id}}/delete" class="delete-button">Delete</a>
+                                </td>
+                            </tr>
+                        {{/each}}
+                    </tbody>
+                </table>
+            {{else}}
+                <p>No blogs available.</p>
+            {{/if}}
+            <a href="/blog/write" class="create-button">Create New Blog</a>
+        </section>
     </section>
 </div>
