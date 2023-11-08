@@ -1,5 +1,5 @@
 import User from '../db/models/User.mjs';
-import BlogPost from '../db/models/BlogPost.mjs';
+import BlogPost from '../db/models/Blogpost.mjs';
 import Tag from '../db/models/Tag.mjs';
 
 async function getBlogPostById(id) {
