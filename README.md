@@ -1,10 +1,11 @@
 # Simple Blog Site
+[ait-project.sashankneupane.com](http://ait-project.sashankneupane.com)
 
 ## Overview
 
-This simple blog site will be a platform for people to write and share it to the world. I will create a site that will support all creation, update, and deletion of existing/new blogs from the site itself.
+The blogsite will be a platform for people to write and share blogs to the world. The site will support all creation, update, and deletion of existing/new blogs from the site itself. The site will also support user authentication.
 
-Only authenticated users can write blogs and blogs written by a user can be seen in their profile page. Users can also see all blogs written by other users in the home page.
+Only authenticated users can write blogs and blogs written by a user can be seen in their profile page. Authenticated users can also view all blogs written by other users in the home page.
 
 ## Data Model
 
@@ -70,60 +71,37 @@ An Example Blogpost with Embedded Items:
 
 ## User Stories or Use Cases
 
-1. **User Registration:**
-   - As a new user, I want to be able to register with a unique username and email, so I can create an account and start using the blog site.
+| #   | User Story                               | Description                                           |
+| --- | ---------------------------------------- | ----------------------------------------------------- |
+| 1   | User Registration                        | New users can register with a unique username and email to create an account and access the blog site. |
+| 2   | User Login                               | Registered users can log in using their username and password to access their accounts and personalized features. |
+| 3   | Password Recovery                        | Users can recover their password in case they forget it, ensuring access to their accounts. |
+| 4   | User Profile                             | Users have a profile page displaying their username, name, email, and a list of authored blog posts for personal information management. |
+| 5   | User Dashboard                           | Logged-in users can access a dashboard to create new blog posts and manage existing content easily. |
+| 6   | Blog Creation                            | Users can create new blog posts by providing a title and content, sharing their thoughts and stories. |
+| 7   | Blog Listing                             | Users can view a list of all blog posts, discovering and reading content authored by others. |
+| 8   | Individual Blog Post View                | Users can read the full title and content of individual blog posts when they click on them. |
+| 9   | Blog Editing                             | Authors of blog posts can edit the content of their existing posts, making updates or corrections. |
+| 10  | Blog Deletion                            | Authors of blog posts can delete their own posts, removing content as needed. |
+| 11  | User Logout                              | Logged-in users can log out to secure their accounts and data when they're done using the site. |
 
-2. **User Login:**
-   - As a registered user, I want to be able to log in using my username and password, so I can access my account and personalized features.
-
-3. **Password Recovery:**
-   - As a user, I want to be able to recover my password in case I forget it, so I can regain access to my account.
-
-4. **User Profile:**
-   - As a user, I want to have a profile page that displays my username, name, email, and a list of my blog posts, so I can manage my personal information and view my authored content.
-
-5. **User Dashboard:**
-   - As a logged-in user, I want to see a dashboard where I can create new blog posts and view my existing posts, so I can easily manage my blog content.
-
-6. **Blog Creation:**
-   - As a user, I want to be able to create new blog posts by providing a title and content, so I can share my thoughts and stories with others.
-
-7. **Blog Listing:**
-   - As a user, I want to see a list of all blog posts, so I can discover and read content authored by other users.
-
-8. **Individual Blog Post View:**
-   - As a user, I want to view an individual blog post's title and content when I click on it, so I can read the full post.
-
-9. **Blog Editing:**
-   - As the author of a blog post, I want to be able to edit the content of my existing posts, so I can make updates or corrections.
-
-10. **Blog Deletion:**
-    - As the author of a blog post, I want to be able to delete my own blog posts, so I can remove content as needed.
-
-11. **User Logout:**
-    - As a logged-in user, I want the ability to log out, so I can secure my account and data when I'm done using the site.
 
 
 ## Research Topics
 
-(__TODO__: the research topics that you're planning on working on along with their point values... and the total points of research topics listed)
+|   Checkbox   | Points | Description                                          |
+|:------------:|:------:|------------------------------------------------------|
+|   [x]        |   5    | Integrate user authentication with Passportjs  |
+|   [ ]        |   4    | Implement client-side form validation using a JavaScript library.  |
+|   [x]        |   3    | Manage configuration variables using dotenv.  |
+|   [x]        |   3    | Deploy the application on a Digital Ocean Droplet with a Namecheap domain.  |
+|   [ ]        |   2    | Style the site using Tailwind CSS.  |
 
-* (5 points) Integrate user authentication and allow for password recovery. 
-    * I am going to be using passport for user authentication
-    * I am also going to be using nodemailer to send emails to users
-    * I will allow password recovery by sending a recovery code to the user's email
-* (4 points) Perform client side form validation using a JavaScript library
-    * I will perform multiple client side form validations using some library or my own functions
-* (3 points) Configuration management
-  * I will use dotenv to manage configuration variables like in class
-* (2 points) Use a tailwind css
-  * I will use tailwind css to style my site
+
 
 ## [Link to Initial Main Project File](app.mjs) 
 
 ## Annotations / References Used
-
-(__TODO__: list any tutorials/references/etc. that you've based your code off of)
 
 1. [passport.js authentication docs](http://passportjs.org/docs) - (add link to source code that was based on this)
 2. [nodemailer docs](https://nodemailer.com/about/) - (add link to source code that was based on this)
