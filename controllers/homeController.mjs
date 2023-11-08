@@ -1,4 +1,4 @@
-mport BlogPost from '../db/models/Blogpost.mjs';
+import BlogPost from '../db/models/Blogpost.mjs';
 
 async function getBlogPosts(query) {
     return await BlogPost.find(query).populate('author');
