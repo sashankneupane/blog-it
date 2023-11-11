@@ -1,27 +1,192 @@
-<link rel="stylesheet" href="/styles/blog-post.css">
-{{#with blogPost}}
-<div class="blog-post">
-    <h2>{{title}}</h2>
-    <p class="author">Written by <a href="/u/{{author.username}}">{{author.username}}</a></p>
-    <p class="date-published">Published on {{publicationDate}}</p>
-    {{#if updatedDate}}
-        <p class="date-updated">Updated on {{updatedDate}}</p>
-    {{/if}}
-    <p class="content">{{content}}</p>
-    
-    {{likes.length}} <img src="/img/like.png" height="20px" width="20px"> {{comments.length}} <img src="/img/comment.png" height="20px" width="20px">
+<link rel="stylesheet" href="/styles.css" />
+<div class="bg-red-100 flex flex-row justify-around">
+  <aside
+    id="default-sidebar"
+    class="shadow rounded-lg p-4 mt-4 top-0 left-0 z-40 w-64 h-full border-r-2 border-red-200 transition-transform -translate-x-full sm:translate-x-0 hover:shadow-2xl hover:cursor-pointer hover:border-none"
+    aria-label="Sidebar"
+  >
+    <h1 class="font-semibold font-mono">Blog Outline</h1>
+  </aside>
+
+  <!-- Center Section (Blog Content) -->
+  <div class="center-section w-3/5 p-4 mt-4">
+    {{#with blogPost}}
+      <!-- Blog Title -->
+      <h1 class="text-3xl font-bold text-gray-900 mb-4">{{title}}</h1>
+
+      <!-- Author Info -->
+      <p class="text-gray-700">Written by
+        <a
+          href="/u/{{author.username}}"
+          class="text-blue-500"
+        >{{author.username}}</a></p>
+      <p class="text-gray-700">Published on {{publicationDate}}</p>
+      {{#if updatedDate}}
+        <p class="text-gray-700">Updated on {{updatedDate}}</p>
+      {{/if}}
+
+      <!-- Blog Content -->
+      <div class="content mt-6 text-gray-800">
+        {{{content}}}
+      </div>
+
+      <!-- Like and Comment Count -->
+      <div class="mt-6 text-gray-700">
+        <span class="mr-2">{{likes.length}}</span>
+        <img
+          src="/img/like.png"
+          alt="Like Icon"
+          class="h-5 w-5 inline-block align-middle"
+        />
+        <span class="ml-4">{{comments.length}}</span>
+        <img
+          src="/img/comment.png"
+          alt="Comment Icon"
+          class="h-5 w-5 inline-block align-middle"
+        />
+      </div>
+
+      <!-- Comments -->
+      <section class="dark:bg-gray-900 py-8 lg:py-16 antialiased">
+  <div class="max-w-2xl mx-auto px-4">
+    <h2 class="text-2xl font-bold text-gray-900 dark:text-white">Discussion ({{comments.length}})</h2>
+    <form class="mt-6">
+      <div class="mb-4">
+        <label for="comment" class="sr-only">Your comment</label>
+        <textarea
+          id="comment"
+          rows="6"
+          class="w-full p-3 text-sm text-gray-900 bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg focus:ring-1 focus:ring-primary-400 dark:focus:ring-primary-900 focus:outline-none"
+          placeholder="Write a comment..."
+          required
+        ></textarea>
+      </div>
+      <button
+        type="submit"
+        class="w-full py-2.5 text-sm font-medium text-white bg-primary-700 rounded-lg hover:bg-primary-800 focus:ring-4 focus:ring-primary-200 dark:focus:ring-primary-900"
+      >
+        Post comment
+      </button>
+    </form>
 
     {{#if comments.length}}
-        <ul class="comment-list">
-            {{#each comments}}
-                <li class="comment">
-                    <div class="comment-header">
-                        <p class="comment-author"><a href="/u/{{author.username}}">{{author.username}}</a></p>
-                    </div>
-                    <p class="comment-text">{{text}}</p>
-                </li>
-            {{/each}}
-        </ul>
+      <ul class="comment-list mt-6">
+        {{#each comments}}
+        <li class="comment bg-white dark:bg-gray-800 shadow-lg rounded-lg mb-6">
+          <div class="p-4">
+            <div class="flex justify-between items-center mb-2">
+              <div class="flex items-center">
+                <img
+                  class="w-8 h-8 rounded-full"
+                  src="{{author.avatar}}"
+                  alt="{{author.name}}"
+                />
+                <div class="ml-3">
+                  <p class="text-sm font-semibold text-gray-900 dark:text-white">
+                    {{author.name}}
+                  </p>
+                  <p class="text-sm text-gray-600 dark:text-gray-400">
+                    <time pubdate datetime="{{publishedDate}}">
+                      {{publishedDateFormatted}}
+                    </time>
+                  </p>
+                </div>
+              </div>
+              <button
+                id="dropdownComment{{comment.id}}Button"
+                data-dropdown-toggle="dropdownComment{{comment.id}}"
+                class="p-2 text-gray-500 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-700 focus:ring-2 focus:ring-primary-400 dark:focus:ring-primary-900 focus:outline-none rounded-full"
+                type="button"
+              >
+                <svg
+                  class="w-4 h-4"
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="currentColor"
+                  viewBox="0 0 16 3"
+                >
+                  <path
+                    d="M2 0a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3Zm6.041 0a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM14 0a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3Z"
+                  />
+                </svg>
+              </button>
+              <div
+                id="dropdownComment{{comment.id}}"
+                class="hidden z-10 w-36 bg-white border border-gray-200 dark:border-gray-600 rounded divide-y divide-gray-200 dark:divide-gray-600 shadow-md absolute right-4 top-10"
+              >
+                <ul
+                  class="text-sm text-gray-700 dark:text-gray-200"
+                  aria-labelledby="dropdownComment{{comment.id}}Button"
+                >
+                  <li>
+                    <a
+                      href="#"
+                      class="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
+                    >
+                      Edit
+                    </a>
+                  </li>
+                  <li>
+                    <a
+                      href="#"
+                      class="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
+                    >
+                      Remove
+                    </a>
+                  </li>
+                  <li>
+                    <a
+                      href="#"
+                      class="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
+                    >
+                      Report
+                    </a>
+                  </li>
+                </ul>
+              </div>
+            </div>
+            <p class="text-gray-700 dark:text-gray-300">{{comment.text}}</p>
+            <div class="flex items-center mt-4">
+              <button
+                type="button"
+                class="text-sm text-primary-700 hover:underline font-medium"
+              >
+                Reply
+              </button>
+            </div>
+          </div>
+        </li>
+        {{/each}}
+      </ul>
     {{/if}}
+  </div>
+</section>
+
+
+    {{/with}}
+  </div>
+
+  <!-- Right Section (Author Info) -->
+  <aside
+    class="sticky lg:col-span-1 hover:border-none hover:shadow-2xl focus:shadow-2xl py-10 px-10 hover:cursor-pointer border-red-200 border-l-2"
+  >
+    <!-- Author Profile Information -->
+    <div class="mb-6">
+      <h2
+        class="text-xl font-semibold font-mono m-0 mb-4 px-4 py-2 bg-purple-300 rounded-xl"
+      >Your Profile</h2>
+      <div class="flex flex-col items-center space-x-4">
+        <img
+          class="w-32 h-32 rounded-full my-5"
+          src="/img/nav/myprofile.jpeg"
+          alt="Author Avatar"
+        />
+        <div>
+          <p class="text-lg font-semibold">Author Name</p>
+          <p class="text-gray-600">Email: author@example.com</p>
+          <p class="text-gray-600">Username: author123</p>
+        </div>
+      </div>
+    </div>
+  </aside>
+
 </div>
-{{/with}}

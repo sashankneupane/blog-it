@@ -1,4 +1,5 @@
 {
+  "type": "module",
   "name": "ait-final-project",
   "version": "1.0.0",
   "description": "Simple blog site.",
@@ -140,7 +141,6 @@
     "picomatch": "^2.3.1",
     "pify": "^2.3.0",
     "pirates": "^4.0.6",
-    "postcss": "^8.4.31",
     "postcss-cli": "^10.1.0",
     "postcss-import": "^15.1.0",
     "postcss-js": "^4.0.1",
@@ -149,6 +149,7 @@
     "postcss-reporter": "^7.0.5",
     "postcss-selector-parser": "^6.0.13",
     "postcss-value-parser": "^4.2.0",
+    "prettier": "^3.0.3",
     "pretty-hrtime": "^1.0.3",
     "proxy-addr": "^2.0.7",
     "punycode": "^2.3.1",
@@ -209,7 +210,10 @@
     "yargs-parser": "^21.1.1"
   },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "npm-run-all -p build-tail start-app",
+    "format": "prettier --write .",
+    "start-app": "nodemon app.mjs",
+    "build-tail": "tailwind -i ./styles/tailwindcss.css -o ./public/styles.css"
   },
   "repository": {
     "type": "git",
@@ -222,6 +226,8 @@
   },
   "homepage": "https://github.com/nyu-csci-ua-0467-001-002-fall-2023/final-project-sashankneupane#readme",
   "devDependencies": {
+    "npm-run-all": "^4.1.5",
+    "postcss": "^8.4.31",
     "tailwindcss": "^3.3.5"
   }
 }

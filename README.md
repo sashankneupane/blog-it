@@ -1,4 +1,5 @@
 # Simple Blog Site
+
 [ait-project.sashankneupane.com](http://ait-project.sashankneupane.com)
 
 ## Overview
@@ -11,7 +12,7 @@ Only authenticated users can write blogs and blogs written by a user can be seen
 
 The application will store Users and Blogs.
 
-* users can have multiple blogs (via references)
+- users can have multiple blogs (via references)
 
 An Example User:
 
@@ -36,7 +37,7 @@ An Example Blogpost with Embedded Items:
 }
 ```
 
-## [Link to Commented First Draft Schema](db.mjs) 
+## [Link to Commented First Draft Schema](db.mjs)
 
 ## Wireframes
 
@@ -64,42 +65,37 @@ An Example Blogpost with Embedded Items:
 /u/:username - user's public blog page
 ![user profile page](public/documentation/username.png)
 
-
 ## Site map
 
 ![site map](public/documentation/site-map.jpeg)
 
 ## User Stories or Use Cases
 
-| #   | User Story                               | Description                                           |
-| --- | ---------------------------------------- | ----------------------------------------------------- |
-| 1   | User Registration                        | New users can register with a unique username and email to create an account and access the blog site. |
-| 2   | User Login                               | Registered users can log in using their username and password to access their accounts and personalized features. |
-| 3   | Password Recovery                        | Users can recover their password in case they forget it, ensuring access to their accounts. |
-| 4   | User Profile                             | Users have a profile page displaying their username, name, email, and a list of authored blog posts for personal information management. |
-| 5   | User Dashboard                           | Logged-in users can access a dashboard to create new blog posts and manage existing content easily. |
-| 6   | Blog Creation                            | Users can create new blog posts by providing a title and content, sharing their thoughts and stories. |
-| 7   | Blog Listing                             | Users can view a list of all blog posts, discovering and reading content authored by others. |
-| 8   | Individual Blog Post View                | Users can read the full title and content of individual blog posts when they click on them. |
-| 9   | Blog Editing                             | Authors of blog posts can edit the content of their existing posts, making updates or corrections. |
-| 10  | Blog Deletion                            | Authors of blog posts can delete their own posts, removing content as needed. |
-| 11  | User Logout                              | Logged-in users can log out to secure their accounts and data when they're done using the site. |
-
-
+| #   | User Story                | Description                                                                                                                              |
+| --- | ------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------- |
+| 1   | User Registration         | New users can register with a unique username and email to create an account and access the blog site.                                   |
+| 2   | User Login                | Registered users can log in using their username and password to access their accounts and personalized features.                        |
+| 3   | Password Recovery         | Users can recover their password in case they forget it, ensuring access to their accounts.                                              |
+| 4   | User Profile              | Users have a profile page displaying their username, name, email, and a list of authored blog posts for personal information management. |
+| 5   | User Dashboard            | Logged-in users can access a dashboard to create new blog posts and manage existing content easily.                                      |
+| 6   | Blog Creation             | Users can create new blog posts by providing a title and content, sharing their thoughts and stories.                                    |
+| 7   | Blog Listing              | Users can view a list of all blog posts, discovering and reading content authored by others.                                             |
+| 8   | Individual Blog Post View | Users can read the full title and content of individual blog posts when they click on them.                                              |
+| 9   | Blog Editing              | Authors of blog posts can edit the content of their existing posts, making updates or corrections.                                       |
+| 10  | Blog Deletion             | Authors of blog posts can delete their own posts, removing content as needed.                                                            |
+| 11  | User Logout               | Logged-in users can log out to secure their accounts and data when they're done using the site.                                          |
 
 ## Research Topics
 
-|   Checkbox   | Points | Description                                          |
-|:------------:|:------:|------------------------------------------------------|
-|   [x]        |   5    | Integrate user authentication with Passportjs  |
-|   [ ]        |   4    | Implement client-side form validation using a JavaScript library.  |
-|   [x]        |   3    | Manage configuration variables using dotenv.  |
-|   [x]        |   3    | Deploy the application on a Digital Ocean Droplet with a Namecheap domain.  |
-|   [ ]        |   2    | Style the site using Tailwind CSS.  |
+| Checkbox | Points | Description                                                                |
+| :------: | :----: | -------------------------------------------------------------------------- |
+|   [x]    |   5    | Integrate user authentication with Passportjs                              |
+|   [ ]    |   4    | Implement client-side form validation using a JavaScript library.          |
+|   [x]    |   3    | Manage configuration variables using dotenv.                               |
+|   [x]    |   3    | Deploy the application on a Digital Ocean Droplet with a Namecheap domain. |
+|   [ ]    |   2    | Style the site using Tailwind CSS.                                         |
 
-
-
-## [Link to Initial Main Project File](app.mjs) 
+## [Link to Initial Main Project File](app.mjs)
 
 ## Annotations / References Used
 
