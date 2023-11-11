@@ -12,14 +12,17 @@ async function getUserByID(id) {
 
 export async function ensureOwnership(req, res, next) {
   if (req.isAuthenticated()) {
+    console.log("Authenticated");
     const blogPost = await getBlogPostById(req.params.blogId);
     if (blogPost && req.user._id.toString() === blogPost.author.toString()) {
       return next();
     }
   }
   if (req.isAuthenticated()) {
+    console.log("Authenticated but not owner");
     res.redirect("/u/dashboard");
   } else {
+    console.log("Not authenticated");
     res.redirect("/auth/login");
   }
 }

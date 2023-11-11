@@ -48,119 +48,126 @@
 
       <!-- Comments -->
       <section class="dark:bg-gray-900 py-8 lg:py-16 antialiased">
-  <div class="max-w-2xl mx-auto px-4">
-    <h2 class="text-2xl font-bold text-gray-900 dark:text-white">Discussion ({{comments.length}})</h2>
-    <form class="mt-6">
-      <div class="mb-4">
-        <label for="comment" class="sr-only">Your comment</label>
-        <textarea
-          id="comment"
-          rows="6"
-          class="w-full p-3 text-sm text-gray-900 bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg focus:ring-1 focus:ring-primary-400 dark:focus:ring-primary-900 focus:outline-none"
-          placeholder="Write a comment..."
-          required
-        ></textarea>
-      </div>
-      <button
-        type="submit"
-        class="w-full py-2.5 text-sm font-medium text-white bg-primary-700 rounded-lg hover:bg-primary-800 focus:ring-4 focus:ring-primary-200 dark:focus:ring-primary-900"
-      >
-        Post comment
-      </button>
-    </form>
-
-    {{#if comments.length}}
-      <ul class="comment-list mt-6">
-        {{#each comments}}
-        <li class="comment bg-white dark:bg-gray-800 shadow-lg rounded-lg mb-6">
-          <div class="p-4">
-            <div class="flex justify-between items-center mb-2">
-              <div class="flex items-center">
-                <img
-                  class="w-8 h-8 rounded-full"
-                  src="{{author.avatar}}"
-                  alt="{{author.name}}"
-                />
-                <div class="ml-3">
-                  <p class="text-sm font-semibold text-gray-900 dark:text-white">
-                    {{author.name}}
-                  </p>
-                  <p class="text-sm text-gray-600 dark:text-gray-400">
-                    <time pubdate datetime="{{publishedDate}}">
-                      {{publishedDateFormatted}}
-                    </time>
-                  </p>
-                </div>
-              </div>
-              <button
-                id="dropdownComment{{comment.id}}Button"
-                data-dropdown-toggle="dropdownComment{{comment.id}}"
-                class="p-2 text-gray-500 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-700 focus:ring-2 focus:ring-primary-400 dark:focus:ring-primary-900 focus:outline-none rounded-full"
-                type="button"
-              >
-                <svg
-                  class="w-4 h-4"
-                  xmlns="http://www.w3.org/2000/svg"
-                  fill="currentColor"
-                  viewBox="0 0 16 3"
-                >
-                  <path
-                    d="M2 0a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3Zm6.041 0a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM14 0a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3Z"
-                  />
-                </svg>
-              </button>
-              <div
-                id="dropdownComment{{comment.id}}"
-                class="hidden z-10 w-36 bg-white border border-gray-200 dark:border-gray-600 rounded divide-y divide-gray-200 dark:divide-gray-600 shadow-md absolute right-4 top-10"
-              >
-                <ul
-                  class="text-sm text-gray-700 dark:text-gray-200"
-                  aria-labelledby="dropdownComment{{comment.id}}Button"
-                >
-                  <li>
-                    <a
-                      href="#"
-                      class="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
-                    >
-                      Edit
-                    </a>
-                  </li>
-                  <li>
-                    <a
-                      href="#"
-                      class="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
-                    >
-                      Remove
-                    </a>
-                  </li>
-                  <li>
-                    <a
-                      href="#"
-                      class="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
-                    >
-                      Report
-                    </a>
-                  </li>
-                </ul>
-              </div>
+        <div class="max-w-2xl mx-auto px-4">
+          <h2
+            class="text-2xl font-bold text-gray-900 dark:text-white"
+          >Discussion ({{comments.length}})</h2>
+          <form class="mt-6">
+            <div class="mb-4">
+              <label for="comment" class="sr-only">Your comment</label>
+              <textarea
+                id="comment"
+                rows="6"
+                class="w-full p-3 text-sm text-gray-900 bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg focus:ring-1 focus:ring-primary-400 dark:focus:ring-primary-900 focus:outline-none"
+                placeholder="Write a comment..."
+                required
+              ></textarea>
             </div>
-            <p class="text-gray-700 dark:text-gray-300">{{comment.text}}</p>
-            <div class="flex items-center mt-4">
-              <button
-                type="button"
-                class="text-sm text-primary-700 hover:underline font-medium"
-              >
-                Reply
-              </button>
-            </div>
-          </div>
-        </li>
-        {{/each}}
-      </ul>
-    {{/if}}
-  </div>
-</section>
+            <button
+              type="submit"
+              class="w-full py-2.5 text-sm font-medium text-white bg-primary-700 rounded-lg hover:bg-primary-800 focus:ring-4 focus:ring-primary-200 dark:focus:ring-primary-900"
+            >
+              Post comment
+            </button>
+          </form>
 
+          {{#if comments.length}}
+            <ul class="comment-list mt-6">
+              {{#each comments}}
+                <li
+                  class="comment bg-white dark:bg-gray-800 shadow-lg rounded-lg mb-6"
+                >
+                  <div class="p-4">
+                    <div class="flex justify-between items-center mb-2">
+                      <div class="flex items-center">
+                        <img
+                          class="w-8 h-8 rounded-full"
+                          src="{{author.avatar}}"
+                          alt="{{author.name}}"
+                        />
+                        <div class="ml-3">
+                          <p
+                            class="text-sm font-semibold text-gray-900 dark:text-white"
+                          >
+                            {{author.name}}
+                          </p>
+                          <p class="text-sm text-gray-600 dark:text-gray-400">
+                            <time pubdate datetime="{{publishedDate}}">
+                              {{publishedDateFormatted}}
+                            </time>
+                          </p>
+                        </div>
+                      </div>
+                      <button
+                        id="dropdownComment{{comment.id}}Button"
+                        data-dropdown-toggle="dropdownComment{{comment.id}}"
+                        class="p-2 text-gray-500 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-700 focus:ring-2 focus:ring-primary-400 dark:focus:ring-primary-900 focus:outline-none rounded-full"
+                        type="button"
+                      >
+                        <svg
+                          class="w-4 h-4"
+                          xmlns="http://www.w3.org/2000/svg"
+                          fill="currentColor"
+                          viewBox="0 0 16 3"
+                        >
+                          <path
+                            d="M2 0a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3Zm6.041 0a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM14 0a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3Z"
+                          />
+                        </svg>
+                      </button>
+                      <div
+                        id="dropdownComment{{comment.id}}"
+                        class="hidden z-10 w-36 bg-white border border-gray-200 dark:border-gray-600 rounded divide-y divide-gray-200 dark:divide-gray-600 shadow-md absolute right-4 top-10"
+                      >
+                        <ul
+                          class="text-sm text-gray-700 dark:text-gray-200"
+                          aria-labelledby="dropdownComment{{comment.id}}Button"
+                        >
+                          <li>
+                            <a
+                              href="#"
+                              class="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
+                            >
+                              Edit
+                            </a>
+                          </li>
+                          <li>
+                            <a
+                              href="#"
+                              class="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
+                            >
+                              Remove
+                            </a>
+                          </li>
+                          <li>
+                            <a
+                              href="#"
+                              class="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
+                            >
+                              Report
+                            </a>
+                          </li>
+                        </ul>
+                      </div>
+                    </div>
+                    <p
+                      class="text-gray-700 dark:text-gray-300"
+                    >{{comment.text}}</p>
+                    <div class="flex items-center mt-4">
+                      <button
+                        type="button"
+                        class="text-sm text-primary-700 hover:underline font-medium"
+                      >
+                        Reply
+                      </button>
+                    </div>
+                  </div>
+                </li>
+              {{/each}}
+            </ul>
+          {{/if}}
+        </div>
+      </section>
 
     {{/with}}
   </div>

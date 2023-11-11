@@ -1,40 +1,53 @@
-<link rel="stylesheet" href="/styles/create-blog.css" />
-<div class="blog-create-wrapper">
-  <header>
-    <h1>Create a Blog Post</h1>
-  </header>
-  <div class="blog-create-form">
-    <form action="/blog/write" method="post">
-      <label for="title">Title</label>
-      <input
-        id="write-blog-title"
-        type="text"
-        name="title"
-        id="title"
-        placeholder="Enter the title of your blog"
-        required
-      />
+<link rel="stylesheet" href="/styles.css" />
 
-      <label for="content">Content</label>
-      <textarea
-        id="write-blog-content"
-        name="content"
-        id="content"
-        placeholder="Write your blog content"
-        rows="8"
-        required
-      >
-      </textarea>
+<div class="blog-create-wrapper bg-red-100 border p-4 rounded-lg shadow-md">
+  <div class="mx-auto w-4/5 h-full">
+    <header class="text-center">
+      <h1 class="text-2xl font-semibold font-mono">Create a Blog Post</h1>
+    </header>
+    <div class="blog-create-form">
+      <form action="/blog/write" method="post">
+        <div class="mb-4">
+          <label for="title" class="block font-medium">Title</label>
+          <input
+            type="text"
+            name="title"
+            placeholder="Enter the title of your blog"
+            required
+            class="w-full px-3 bg-red-50 py-2 border rounded-md focus:outline-none focus:ring focus:ring-primary-400"
+          />
+        </div>
 
-      <label for="tags">Tags</label>
-      <input
-        type="text"
-        name="tags"
-        id="write-blog-tags"
-        placeholder="Add tags (comma-separated)"
-      />
+        <div class="mb-4">
+          <label for="content" class="block font-medium">Content</label>
+          <textarea
+            name="content"
+            placeholder="Write your blog content"
+            rows="8"
+            required
+            class="w-full px-3 bg-red-50 py-2 border rounded-md focus:outline-none focus:ring focus:ring-primary-400"
+          ></textarea>
+        </div>
 
-      <button id="write-blog-submit" type="submit">Create Blog</button>
-    </form>
+        <div class="mb-4">
+          <label for="tags" class="block font-medium">Tags</label>
+          <input
+            type="text"
+            name="tags"
+            placeholder="Add tags (comma-separated)"
+            class="w-full bg-red-50 px-3 py-2 border rounded-md focus:outline-none focus:ring focus:ring-primary-400"
+          />
+        </div>
+
+        <button
+          type="submit"
+          class="px-10 self-center text-gray-900 py-2 border-red-400 border-2 rounded-md hover:bg-red-400 focus:ring-4 focus:ring-red-600"
+        >
+          Create Blog
+        </button>
+      </form>
+    </div>
+
   </div>
+
 </div>
