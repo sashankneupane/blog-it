@@ -19,7 +19,7 @@ export async function getDashboardPage(req, res) {
   if (req.isAuthenticated()) {
     const user = req.user;
     const blogPosts = await BlogPost.find({ author: user._id });
-    res.render("dashboard", {
+    res.render("dashboard-layout", {
       username: user.username,
       userBlogs: blogPosts,
       user: req.user,

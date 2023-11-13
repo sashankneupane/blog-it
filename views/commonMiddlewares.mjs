@@ -18,9 +18,9 @@ export default function setCommonMiddlewares(app) {
 
   const exhbs = create({
     extname: ".hbs",
-    defaultLayout: 'layout',
     engine: engine(
       {
+        defaultLayout: 'layout',
         layoutsDir: layoutsDir,
         partialsDir: partialsDir,
       },

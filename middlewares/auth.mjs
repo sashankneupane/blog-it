@@ -48,8 +48,10 @@ export function setPassportStrategies(app) {
 }
 
 export function ensureAuthentication(req, res, next) {
+  req.session.returnTo = req.originalUrl; 
+  console.log(req.session)
   if (req.isAuthenticated()) {
     return next();
   }
-  res.redirect("/home");
+  res.redirect("/auth/login");
 }

@@ -1,10 +1,6 @@
 import passport from "passport";
 import User from "../db/models/User.mjs";
 
-async function getUserByUsername(username) {
-  return await User.findOne({ username: username });
-}
-
 export async function getRegisterPage(req, res) {
   if (req.isAuthenticated()) {
     res.redirect("/u/dashboard");
@@ -36,20 +32,22 @@ export async function registerUser(req, res) {
 }
 
 export async function loginUser(req, res, next) {
+  const redirectTo = req.session.returnTo || '/home';
   passport.authenticate("local", (err, user, info) => {
     if (err) {
       console.error("Error:", err);
       return next(err);
     }
     if (!user) {
-      return res.redirect("/auth/login?message=Incorrect+Credentials");
+      return res.redirect("/auth/login");
     }
     req.logIn(user, (err) => {
       if (err) {
         console.error("Error:", err);
         return next(err);
       }
-      return res.redirect("/home?message=successfully+logged+in");
+      console.log(req.session)
+      return res.redirect(redirectTo);
     });
   })(req, res, next);
 }
