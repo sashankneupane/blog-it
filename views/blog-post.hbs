@@ -1,5 +1,4 @@
-<link rel="stylesheet" href="/styles.css" />
-<div class="bg-red-100 flex flex-row justify-around">
+<div class="min-h-screen bg-red-100 flex flex-row justify-around">
   <aside
     id="default-sidebar"
     class="shadow rounded-lg p-4 mt-4 top-0 left-0 z-40 w-64 h-full border-r-2 border-red-200 transition-transform -translate-x-full sm:translate-x-0 hover:shadow-2xl hover:cursor-pointer hover:border-none"
@@ -20,59 +19,75 @@
           href="/u/{{author.username}}"
           class="text-blue-500"
         >{{author.username}}</a></p>
-      <p class="text-gray-700">Published on {{publicationDate}}</p>
+      <p class="text-gray-700">Published on {{formatDate publicationDate}}</p>
       {{#if updatedDate}}
-        <p class="text-gray-700">Updated on {{updatedDate}}</p>
+        <p class="text-gray-700">Updated on {{formatDate updatedDate}}</p>
       {{/if}}
 
       <!-- Blog Content -->
       <div class="content mt-6 text-gray-800">
-        {{{content}}}
+        {{{this.content}}}
       </div>
 
       <!-- Like and Comment Count -->
-      <div class="mt-6 text-gray-700">
-        <span class="mr-2">{{likes.length}}</span>
-        <img
-          src="/img/like.png"
-          alt="Like Icon"
-          class="h-5 w-5 inline-block align-middle"
-        />
-        <span class="ml-4">{{comments.length}}</span>
-        <img
-          src="/img/comment.png"
-          alt="Comment Icon"
-          class="h-5 w-5 inline-block align-middle"
-        />
+      <div class="mt-6 text-gray-700 flex flex-row justify-start">
+        <div class="flex flex-row align-middle">
+            <span class="items-center align-middle">{{likes.length}}</span>
+            <svg class="w-6 h-6 ml-2" viewBox="0 0 25 25" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M8.9707 19.42V13.89" stroke="#000000" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+              <path d="M2.28234 12.67C2.25751 12.2167 2.32536 11.7631 2.48175 11.3369C2.63813 10.9106 2.87975 10.5208 3.19187 10.1911C3.504 9.86141 3.88006 9.59877 4.29708 9.41931C4.71411 9.23985 5.16335 9.14734 5.61735 9.14734C6.07135 9.14734 6.52058 9.23985 6.9376 9.41931C7.35463 9.59877 7.73069 9.86141 8.04281 10.1911C8.35493 10.5208 8.59657 10.9106 8.75296 11.3369C8.90934 11.7631 8.97717 12.2167 8.95234 12.67V18.3C8.97717 18.7533 8.90934 19.207 8.75296 19.6332C8.59657 20.0594 8.35493 20.4492 8.04281 20.7789C7.73069 21.1086 7.35463 21.3712 6.9376 21.5507C6.52058 21.7301 6.07135 21.8227 5.61735 21.8227C5.16335 21.8227 4.71411 21.7301 4.29708 21.5507C3.88006 21.3712 3.504 21.1086 3.19187 20.7789C2.87975 20.4492 2.63813 20.0594 2.48175 19.6332C2.32536 19.207 2.25751 18.7533 2.28234 18.3V12.67Z" stroke="#000000" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+              <path d="M8.97076 18.3C8.96813 18.7399 9.05217 19.176 9.21809 19.5835C9.38402 19.9909 9.62857 20.3617 9.93779 20.6747C10.247 20.9876 10.6148 21.2366 11.0203 21.4073C11.4257 21.5781 11.8608 21.6674 12.3008 21.67H16.4208C17.3814 21.6693 18.316 21.357 19.0841 20.78C19.8522 20.203 20.4125 19.3924 20.6808 18.47L22.1808 13.39C22.3002 13.0523 22.3372 12.691 22.2889 12.3361C22.2405 11.9812 22.1081 11.643 21.9028 11.3496C21.6974 11.0562 21.4249 10.816 21.108 10.6491C20.7911 10.4822 20.4389 10.3934 20.0808 10.39H14.5608V5.10999C14.5621 4.91825 14.5256 4.72818 14.4535 4.55054C14.3813 4.3729 14.2749 4.21121 14.1402 4.07471C14.0056 3.9382 13.8454 3.82953 13.6687 3.75494C13.4921 3.68036 13.3025 3.64132 13.1108 3.64001V3.64001C12.7953 3.64144 12.4889 3.74572 12.2381 3.93701C11.9872 4.1283 11.8056 4.39617 11.7208 4.70001L8.97076 13.86" stroke="#000000" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+        </div>
+        
+      <div class="flex flex-row align-middle ml-6">
+        <span class="items-center align-middle">{{comments.length}}</span>
+        <svg class="w-6 h-6 ml-2" viewBox="0 0 32 32" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:sketch="http://www.bohemiancoding.com/sketch/ns">
+            </defs>
+                <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" sketch:type="MSPage">
+                    <g id="Icon-Set" sketch:type="MSLayerGroup" transform="translate(-152.000000, -255.000000)" fill="#000000">
+                        <path d="M168,281 C166.832,281 165.704,280.864 164.62,280.633 L159.912,283.463 L159.975,278.824 C156.366,276.654 154,273.066 154,269 C154,262.373 160.268,257 168,257 C175.732,257 182,262.373 182,269 C182,275.628 175.732,281 168,281 L168,281 Z M168,255 C159.164,255 152,261.269 152,269 C152,273.419 154.345,277.354 158,279.919 L158,287 L165.009,282.747 C165.979,282.907 166.977,283 168,283 C176.836,283 184,276.732 184,269 C184,261.269 176.836,255 168,255 L168,255 Z M175,266 L161,266 C160.448,266 160,266.448 160,267 C160,267.553 160.448,268 161,268 L175,268 C175.552,268 176,267.553 176,267 C176,266.448 175.552,266 175,266 L175,266 Z M173,272 L163,272 C162.448,272 162,272.447 162,273 C162,273.553 162.448,274 163,274 L173,274 C173.552,274 174,273.553 174,273 C174,272.447 173.552,272 173,272 L173,272 Z" id="comment-2" sketch:type="MSShapeGroup">
+
+            </path>
+                    </g>
+                </g>
+      </svg>
+      </div>
+        
       </div>
 
       <!-- Comments -->
-      <section class="dark:bg-gray-900 py-8 lg:py-16 antialiased">
-        <div class="max-w-2xl mx-auto px-4">
+      <section class="w-full py-8 lg:py-16 antialiased">
+        <div class="mx-auto px-4">
           <h2
-            class="text-2xl font-bold text-gray-900 dark:text-white"
+            class="text-2xl font-bold text-gray-900 dark:text-white mb-4"
           >Discussion ({{comments.length}})</h2>
-          <form class="mt-6">
-            <div class="mb-4">
-              <label for="comment" class="sr-only">Your comment</label>
-              <textarea
-                id="comment"
-                rows="6"
-                class="w-full p-3 text-sm text-gray-900 bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg focus:ring-1 focus:ring-primary-400 dark:focus:ring-primary-900 focus:outline-none"
-                placeholder="Write a comment..."
-                required
-              ></textarea>
-            </div>
-            <button
-              type="submit"
-              class="w-full py-2.5 text-sm font-medium text-white bg-primary-700 rounded-lg hover:bg-primary-800 focus:ring-4 focus:ring-primary-200 dark:focus:ring-primary-900"
-            >
-              Post comment
-            </button>
-          </form>
+          {{#if ../user}}
+            <form class="mt-6">
+              <div class="mb-4">
+                <label for="comment" class="sr-only">Your comment</label>
+                <textarea
+                  id="comment"
+                  rows="2"
+                  class="w-full p-3 text-sm resize-y text-gray-900 bg-white border border-gray-200 rounded-lg focus:ring-1 focus:ring-primary-400 dark:focus:ring-primary-900 focus:outline-none"
+                  placeholder="Write a comment..."
+                  required
+                ></textarea>
+              </div>
+              <button
+                type="submit"
+                class="py-2.5 px-4 mx-auto text-sm font-medium text-grey bg-red-300 rounded-lg hover:bg-red-400"
+              >
+                Post comment
+              </button>
+            </form>
+          {{/if}}
+          {{#unless ../user}}
+            <div><a class="px-4 py-2 bg-red-300 hover:bg-red-400 rounded-xl mb-6" href="/auth/login">Comment</a></div>
+          {{/unless}}
 
           {{#if comments.length}}
-            <ul class="comment-list mt-6">
+            <ul class="comment-list my-0 mt-6">
               {{#each comments}}
                 <li
                   class="comment bg-white dark:bg-gray-800 shadow-lg rounded-lg mb-6"
@@ -81,8 +96,8 @@
                     <div class="flex justify-between items-center mb-2">
                       <div class="flex items-center">
                         <img
-                          class="w-8 h-8 rounded-full"
-                          src="{{author.avatar}}"
+                          class="w-10 h-10 rounded-full"
+                          src="/img/nav/myprofile.jpeg"
                           alt="{{author.name}}"
                         />
                         <div class="ml-3">
@@ -92,8 +107,8 @@
                             {{author.name}}
                           </p>
                           <p class="text-sm text-gray-600 dark:text-gray-400">
-                            <time pubdate datetime="{{publishedDate}}">
-                              {{publishedDateFormatted}}
+                            <time pubdate datetime="{{date}}">
+                              {{formatDate date}}
                             </time>
                           </p>
                         </div>
@@ -152,15 +167,7 @@
                     </div>
                     <p
                       class="text-gray-700 dark:text-gray-300"
-                    >{{comment.text}}</p>
-                    <div class="flex items-center mt-4">
-                      <button
-                        type="button"
-                        class="text-sm text-primary-700 hover:underline font-medium"
-                      >
-                        Reply
-                      </button>
-                    </div>
+                    >{{this.text}}</p>
                   </div>
                 </li>
               {{/each}}
@@ -168,32 +175,35 @@
           {{/if}}
         </div>
       </section>
-
     {{/with}}
   </div>
 
   <!-- Right Section (Author Info) -->
+  <a href="/u/{{blogPost.author.username}}">
   <aside
-    class="sticky lg:col-span-1 hover:border-none hover:shadow-2xl focus:shadow-2xl py-10 px-10 hover:cursor-pointer border-red-200 border-l-2"
+    class="sticky h-fit rounded-xl hover:border-none hover:shadow-2xl py-10 px-10 hover:cursor-pointer border-red-200 border-l-2"
   >
     <!-- Author Profile Information -->
     <div class="mb-6">
       <h2
         class="text-xl font-semibold font-mono m-0 mb-4 px-4 py-2 bg-purple-300 rounded-xl"
-      >Your Profile</h2>
+      >Author's Profile</h2>
       <div class="flex flex-col items-center space-x-4">
         <img
-          class="w-32 h-32 rounded-full my-5"
+          class="w-32 h-32  rounded-full my-5"
           src="/img/nav/myprofile.jpeg"
           alt="Author Avatar"
         />
+        {{#with blogPost.author}}
         <div>
-          <p class="text-lg font-semibold">Author Name</p>
-          <p class="text-gray-600">Email: author@example.com</p>
-          <p class="text-gray-600">Username: author123</p>
+          <p class="text-lg font-semibold">{{name}}</p>
+          <p class="text-gray-600">Email: {{email}}</p>
+          <p class="text-gray-600">Username: {{username}}</p>
         </div>
+        {{/with}}
       </div>
     </div>
   </aside>
+  </a>
 
 </div>

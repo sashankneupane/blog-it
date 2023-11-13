@@ -1,21 +1,112 @@
 import BlogPost from "../db/models/Blogpost.mjs";
+import User from "../db/models/User.mjs";
+import Tag from "../db/models/Tag.mjs";
 
 async function getBlogPosts(query) {
   let blogPosts;
+  const filter = {};
+
   if (query.search) {
     const regexPattern = new RegExp(query.search, "i");
-    blogPosts = await BlogPost.find({
-      $or: [{ title: regexPattern }, { content: regexPattern }],
-    });
-  } else {
-    // If there is no search query, return all blog posts
-    blogPosts = await BlogPost.find({});
+    filter.$or = [{ title: regexPattern }, { content: regexPattern }];
   }
+
+  if (query.author) {
+    try {
+      const author = await User.findOne({ username: query.author });
+      filter.author = author._id;
+    } catch (error) {
+      console.error("No such author:", error);
+    }
+  }
+
+  if (query.keyword) {
+    const regexPattern = new RegExp(query.keyword, "i");
+    filter.$or = [{ title: regexPattern }, { content: regexPattern }];
+  }
+
+  if (query.tag) {
+    const tag = await Tag.findOne({ name: query.tag });
+    filter.tags = { $in: [tag._id] };
+  }
+
+  try {
+    blogPosts = await BlogPost.find(filter).populate("author").populate("tags");
+  } catch (error) {
+    console.error("Error fetching blog posts:", error);
+  }
+
   return blogPosts;
 }
+
 export async function getHomePage(req, res) {
   const data = {};
-  data.blogPosts = await getBlogPosts(req.query || {});
+  data.blogPosts = await getBlogPosts(req.query);
+  data.popularTags = await BlogPost.aggregate([
+    {
+      $unwind: "$tags",
+    },
+    {
+      $group: {
+        _id: "$tags",
+        count: { $sum: 1 },
+      },
+    },
+    {
+      $lookup: {
+        from: "tags", // Assuming your tags collection is named "tags"
+        localField: "_id",
+        foreignField: "_id",
+        as: "tagInfo",
+      },
+    },
+    {
+      $unwind: "$tagInfo",
+    },
+    {
+      $project: {
+        name: "$tagInfo.name",
+        count: 1,
+      },
+    },
+    {
+      $sort: { count: -1 },
+    },
+    {
+      $limit: 3,
+    },
+  ]);
+  data.popularAuthors = await BlogPost.aggregate([
+    {
+      $group: {
+        _id: "$author",
+        averageLikes: { $avg: { $size: "$likes" } },
+      },
+    },
+    {
+      $lookup: {
+        from: "users", // Assuming your users collection is named "users"
+        localField: "_id",
+        foreignField: "_id",
+        as: "authorInfo",
+      },
+    },
+    {
+      $unwind: "$authorInfo",
+    },
+    {
+      $project: {
+        username: "$authorInfo.username",
+        averageLikes: 1,
+      },
+    },
+    {
+      $sort: { averageLikes: -1 },
+    },
+    {
+      $limit: 3,
+    },
+  ]);
   res.render("home", {
     data: data,
     user: req.user,

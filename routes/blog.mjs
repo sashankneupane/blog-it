@@ -3,6 +3,7 @@ import {
   getWriteBlogPage,
   writeBlogPost,
   getBlogPageById,
+  getRandomBlogPost,
   getBlogEditPageById,
   editBlogPostById,
   deleteBlogPostById,
@@ -11,6 +12,9 @@ import {
 import { ensureAuthentication } from "../middlewares/auth.mjs";
 
 const router = express.Router();
+
+// Random blog post
+router.get("/random", getRandomBlogPost);
 
 // Page to write a new blog post
 router.get("/write", ensureAuthentication, getWriteBlogPage);

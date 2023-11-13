@@ -1,7 +1,11 @@
-  <main class="mx-auto text-center lg:mb-16 mb-8">
+<div
+  class="bg-red-100 flex flex-row justify-around border-t-2 border-red-200 py-10 px-5"
+>
+  {{> leftdashboard}}
+  <main class="mx-auto text-center lg:mb-16 mb-8 w-3/5">
     <h1 class="text-3xl font-semibold font-mono">Your Blog Posts</h1>
     <div class="relative overflow-x-auto shadow-md sm:rounded-lg mt-10">
-      <table class="text-sm text-left rtl:text-right text-gray-500 w-full">
+      <table class="text-md text-left rtl:text-right text-gray-500 w-full">
         <thead class="text-xs text-gray-700 uppercase bg-purple-300">
           <tr>
             <th scope="col" class="px-6 py-3">
@@ -25,17 +29,19 @@
                 <a href="/blog/{{_id}}">{{title}}</a>
               </th>
               <td class="px-6 py-4">
-                {{publicationDate}}
+                {{formatDate publicationDate}}
               </td>
-              <td class="px-6 py-4">
+              <td class="px-6 py-4 flex flex-row justify-start">
                 <a
                   href="/blog/{{_id}}/edit"
-                  class="font-medium text-blue-600 dark:text-blue-500 hover:underline"
-                >Edit</a>
+                  class="bg-blue-100 hover:bg-blue-200 p-2 rounded-md"
+                >
+                <img class="h-4 w-" src="/img/edit.png" alt="Edit">
+                </a>
                 <a
                   href="/blog/{{_id}}/delete"
-                  class="font-medium text-red-600 dark:text-red-500 hover:underline ml-2"
-                >Delete</a>
+                  class="bg-red-100 hover:bg-red-200 p-2 rounded-md ml-2"
+                ><img class="h-4 w-4" src="/img/delete.png" alt="Delete"></a>
               </td>
             </tr>
           {{/each}}
@@ -44,3 +50,6 @@
     </div>
 
   </main>
+
+  {{> rightdashboard}}
+</div>

@@ -12,23 +12,22 @@ async function getUserByID(id) {
 
 export async function ensureOwnership(req, res, next) {
   if (req.isAuthenticated()) {
-    console.log("Authenticated");
     const blogPost = await getBlogPostById(req.params.blogId);
     if (blogPost && req.user._id.toString() === blogPost.author.toString()) {
       return next();
     }
   }
   if (req.isAuthenticated()) {
-    console.log("Authenticated but not owner");
     res.redirect("/u/dashboard");
   } else {
-    console.log("Not authenticated");
     res.redirect("/auth/login");
   }
 }
 
 export async function getWriteBlogPage(req, res) {
-  res.render("write");
+  res.render("write", {
+    user: req.user,
+  });
 }
 
 export async function writeBlogPost(req, res) {
@@ -63,6 +62,9 @@ export async function getBlogPageById(req, res) {
         return like;
       }),
     );
+    blogPost.author.blogPosts = await BlogPost.find({
+      author: blogPost.author._id,
+    });
   } catch (error) {
     console.error("Error getting blog post:", error);
     res.status(500).send("Internal Server Error");
@@ -71,6 +73,19 @@ export async function getBlogPageById(req, res) {
     blogPost: blogPost,
     user: req.user,
   });
+}
+
+export async function getRandomBlogPost(req, res) {
+  try {
+    const randomBlogPost = await BlogPost.aggregate([
+      { $sample: { size: 1 } },
+      { $project: { _id: 1 } },
+    ]);
+    res.redirect(`/blog/${randomBlogPost[0]._id}`);
+  } catch (error) {
+    console.error("Error getting random blog post:", error);
+    res.status(500).send("Internal Server Error");
+  }
 }
 
 export async function getBlogEditPageById(req, res) {

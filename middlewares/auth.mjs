@@ -48,8 +48,7 @@ export function setPassportStrategies(app) {
 }
 
 export function ensureAuthentication(req, res, next) {
-  req.session.returnTo = req.originalUrl; 
-  console.log(req.session)
+  req.session.returnTo = req.originalUrl;
   if (req.isAuthenticated()) {
     return next();
   }

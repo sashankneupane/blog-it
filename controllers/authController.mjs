@@ -32,7 +32,7 @@ export async function registerUser(req, res) {
 }
 
 export async function loginUser(req, res, next) {
-  const redirectTo = req.session.returnTo || '/home';
+  const redirectTo = req.session.returnTo || "/home";
   passport.authenticate("local", (err, user, info) => {
     if (err) {
       console.error("Error:", err);
@@ -46,7 +46,6 @@ export async function loginUser(req, res, next) {
         console.error("Error:", err);
         return next(err);
       }
-      console.log(req.session)
       return res.redirect(redirectTo);
     });
   })(req, res, next);
