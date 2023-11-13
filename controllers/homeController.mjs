@@ -26,8 +26,11 @@ async function getBlogPosts(query) {
   }
 
   if (query.tag) {
-    const tag = await Tag.findOne({ name: query.tag });
-    filter.tags = { $in: [tag._id] };
+    const tagName = query.tag.toLowerCase();
+    const tag = await Tag.findOne({ name: tagName });
+    if (tag) {
+      filter.tags = { $in: [tag._id] };
+    }
   }
 
   try {
@@ -109,6 +112,7 @@ export async function getHomePage(req, res) {
   ]);
   res.render("home", {
     data: data,
+    query: req.query,
     user: req.user,
   });
 }

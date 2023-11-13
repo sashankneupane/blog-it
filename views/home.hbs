@@ -14,6 +14,9 @@
               name="author"
               id="author"
               placeholder="Author Username"
+              {{#if query.author}}
+                value="{{query.author}}"
+              {{/if}}
             />
           </div>
           <div class="mb-4">
@@ -23,19 +26,22 @@
               name="keyword"
               id="keywords"
               placeholder="Search Keyword"
+              {{#if query.keyword}}
+                value="{{query.keyword}}"
+              {{/if}}
             />
           </div>
           <div class="mb-4">
-            <select
+            <input
               class="mb-4 rounded-xl h-8 w-64 px-4 bg-red-100 border-red-200 border-2"
+              type="text"
               name="tag"
               id="tag"
-            >
-              <option value="">Any Tag</option>
-              {{#each availableTags}}
-                <option value="{{this}}">{{this}}</option>
-              {{/each}}
-            </select>
+              placeholder="Tag"
+              {{#if query.tag}}
+                value="{{query.tag}}"
+              {{/if}}
+            />
           </div>
           <button
             class="bg-red-300 text-black px-8 py-2 mt-4 rounded-xl hover:bg-red-400"
@@ -82,8 +88,8 @@
                 <div class="flex items-center space-x-4">
                   <img
                     class="w-7 h-7 rounded-full"
-                    src="https://flowbite.s3.amazonaws.com/blocks/marketing-ui/avatars/jese-leos.png"
-                    alt="Jese Leos avatar"
+                    src="/img/profile-user.png"
+                    alt="{{author.username}}"
                   />
                   <a href="/u/{{author.username}}">
                     <span

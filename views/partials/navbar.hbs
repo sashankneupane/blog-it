@@ -48,6 +48,9 @@
             name="search"
             class="block w-64 pl-10 text-sm text-black border border-red-100 rounded-lg bg-red-50 focus:ring-red-400 focus:outline-none focus:border-red-500 dark:bg-gray-700"
             placeholder="Search..."
+            {{#if query.search}}
+              value="{{query.search}}"
+            {{/if}}
           />
           <button
             type="submit"
