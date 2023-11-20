@@ -37,47 +37,29 @@ An Example Blogpost with Embedded Items:
 }
 ```
 
-## [Link to Commented First Draft Schema](db.mjs)
+## [Link to Commented First Draft Schema](db/models/Blogpost.mjs)
 
-## Wireframes
+## Site Map and Pages
 
-/ - home page
-![home page](public/documentation/home.png)
-
-/register - registration page
-![registration page](public/documentation/register.png)
-
-/login - login page
-![login page](public/documentation/login.png)
-
-/dashboard - user dashboard page
-![user dashboard page](public/documentation/dashboard.png)
-
-/blog-create - blog create page
-![blog create page](public/documentation/blog-create.png)
-
-/blog/:blogId - blog post page
-![blog post page](public/documentation/blog-post.png)
-
-/blog/:blogId/edit - blog edit page
-![blog edit page](public/documentation/blog-edit.png)
-
-/u/:username - user's public blog page
-![user profile page](public/documentation/username.png)
-
-## Site map
-
-![site map](public/documentation/site-map.jpeg)
+| Page                  | Description                                       | Path                 | Image                                          |
+|-----------------------|---------------------------------------------------|----------------------|------------------------------------------------|
+| Home                  | Home page                                         | `/home`              | ![Home Page](public/documentation/home.png)    |
+| Login                 | Login page                                        | `/login`             | ![Login Page](public/documentation/login.png)  |
+| Register              | Registration page                                 | `/register`          | ![Register Page](public/documentation/register.png)  |
+| User Public Page      | Public page displaying user's blog posts          | `/u/:username`       | ![User Public Page](public/documentation/username.png)  |
+| Blog Page             | Page displaying a specific blog post             | `/blog/:blogId`      | ![Blog Page](public/documentation/blog-post.png)  |
+| Edit Blog Page        | Edit page for a specific blog post (author only) | `/blog/:blogId/edit` | ![Edit Blog Page](public/documentation/blog-edit.png)  |
+| Write Blog Page       | Page for writing a new blog post (logged-in)     | `/blog/write`        | ![Write Blog Page](public/documentation/blog-create.png)  |
+| User Dashboard        | Dashboard with blog management options           | `/u/dashboard`       | ![User Dashboard](public/documentation/dashboard.png)  |
 
 ## User Stories or Use Cases
 
 | #   | User Story                | Description                                                                                                                              |
 | --- | ------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------- |
 | 1   | User Registration         | New users can register with a unique username and email to create an account and access the blog site.                                   |
-| 2   | User Login                | Registered users can log in using their username and password to access their accounts and personalized features.                        |
-| 3   | Password Recovery         | Users can recover their password in case they forget it, ensuring access to their accounts.                                              |
+| 2   | User Login                | Registered users can log in using their username and password to access their accounts and personalized features.                        |                                      |
 | 4   | User Profile              | Users have a profile page displaying their username, name, email, and a list of authored blog posts for personal information management. |
-| 5   | User Dashboard            | Logged-in users can access a dashboard to create new blog posts and manage existing content easily.                                      |
+| 5   | User Dashboard            | Logged-in users can access a dashboard to create new blog posts and edit/delete existing content easily.                                      |
 | 6   | Blog Creation             | Users can create new blog posts by providing a title and content, sharing their thoughts and stories.                                    |
 | 7   | Blog Listing              | Users can view a list of all blog posts, discovering and reading content authored by others.                                             |
 | 8   | Individual Blog Post View | Users can read the full title and content of individual blog posts when they click on them.                                              |
@@ -89,15 +71,19 @@ An Example Blogpost with Embedded Items:
 
 | Checkbox | Points | Description                                                                |
 | :------: | :----: | -------------------------------------------------------------------------- |
-|   [x]    |   5    | Integrate user authentication with Passportjs                              |
-|   [ ]    |   4    | Implement client-side form validation using a JavaScript library.          |
-|   [x]    |   3    | Manage configuration variables using dotenv.                               |
-|   [x]    |   3    | Deploy the application on a Digital Ocean Droplet with a Namecheap domain. |
-|   [ ]    |   2    | Style the site using Tailwind CSS.                                         |
+|   ✅    |   5    | Integrate user authentication with Passportjs                              |
+|   🛠️    |   4    | Implement client-side form validation using a JavaScript library.          |
+|   ✅    |   3    | Manage configuration variables using dotenv.                               |
+|   ✅    |   3    | Deploy the application on a Digital Ocean Droplet with a Namecheap domain. |
+|   ✅    |   2    | Style the site using Tailwind CSS.                |
 
 ## [Link to Initial Main Project File](app.mjs)
 
 ## Annotations / References Used
 
-1. [passport.js authentication docs](http://passportjs.org/docs) - (add link to source code that was based on this)
-2. [nodemailer docs](https://nodemailer.com/about/) - (add link to source code that was based on this)
+1. [passport.js authentication docs](http://passportjs.org/docs) - ([usage](middlewares/auth.mjs))
+2. [CKEditor 5](https://ckeditor.com/docs/ckeditor5/latest/builds/guides/integration/frameworks/react.html) - ([usage](views/write.hbs#L60-L73))
+3. [Tailwind CSS](https://tailwindcss.com)- ([usage](/tailwind.config.js#L1-L11))
+4. [dotenv](https://www.npmjs.com/package/dotenv) - ([usage](config.mjs#L1-L2))
+5. [Digital Ocean](https://www.digitalocean.com/) - For hosting the application
+6. [Namecheap](https://www.namecheap.com/) - For the domain name
