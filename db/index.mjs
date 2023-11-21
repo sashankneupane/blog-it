@@ -4,10 +4,14 @@ const dbURL = process.env.DSN;
 
 mongoose.connect(dbURL);
 
-const db = mongoose.connection;
+const client = mongoose.connection;
 
-db.on(
+client.on(
   "error",
   console.log.bind(console, "Connection error: Check your database connection"),
 );
-db.once("open", () => console.log("Connected to the database."));
+client.once("open", () => console.log("Connected to the database."));
+
+const db = client.useDb("BlogIt");
+
+export default db;

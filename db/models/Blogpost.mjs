@@ -1,4 +1,5 @@
 import mongoose from "mongoose";
+import db from "../index.mjs";
 
 const blogPostSchema = new mongoose.Schema({
   title: {
@@ -54,9 +55,9 @@ const blogPostSchema = new mongoose.Schema({
 });
 
 let BlogPost;
-if (mongoose.models.BlogPost) {
-  BlogPost = mongoose.model("BlogPost");
+if (db.models.BlogPost) {
+  BlogPost = db.model("BlogPost");
 } else {
-  BlogPost = mongoose.model("BlogPost", blogPostSchema);
+  BlogPost = db.model("BlogPost", blogPostSchema);
 }
 export default BlogPost;

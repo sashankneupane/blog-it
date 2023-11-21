@@ -1,4 +1,5 @@
 import mongoose from "mongoose";
+import db from "../index.mjs";
 
 const userSchema = new mongoose.Schema({
   username: {
@@ -21,10 +22,10 @@ const userSchema = new mongoose.Schema({
 });
 
 let User;
-if (mongoose.models.User) {
-  User = mongoose.model("User");
+if (db.models.User) {
+  User = db.model("User");
 } else {
-  User = mongoose.model("User", userSchema);
+  User = db.model("User", userSchema);
 }
 
 export default User;

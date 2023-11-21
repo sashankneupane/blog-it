@@ -1,4 +1,5 @@
 import mongoose from "mongoose";
+import db from "../index.mjs";
 
 const tagSchema = new mongoose.Schema({
   name: {
@@ -9,10 +10,10 @@ const tagSchema = new mongoose.Schema({
 });
 
 let Tag;
-if (mongoose.models.Tag) {
-  Tag = mongoose.model("Tag");
+if (db.models.Tag) {
+  Tag = db.model("Tag");
 } else {
-  Tag = mongoose.model("Tag", tagSchema);
+  Tag = db.model("Tag", tagSchema);
 }
 
 export default Tag;
