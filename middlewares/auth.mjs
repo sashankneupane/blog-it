@@ -2,6 +2,7 @@ import passport from "passport";
 import LocalStrategy from "passport-local";
 import session from "express-session";
 import crypto from "crypto";
+import bcryptjs from "bcryptjs";
 
 import User from "../db/models/User.mjs";
 
@@ -29,7 +30,11 @@ export function setPassportStrategies(app) {
         if (!user) {
           return done(null, false, { message: "Incorrect username." });
         }
-        if (user.password !== password) {
+        const isValidPassword = await bcryptjs.compare(
+          password,
+          user.password,
+        );
+        if (!isValidPassword) {
           return done(null, false, { message: "Incorrect password." });
         }
         return done(null, user);
