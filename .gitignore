@@ -8,5 +8,7 @@ node_modules/
 
 dev/venv/
 
+public/img/dp/
+
 .package-lock.json
 .package.json

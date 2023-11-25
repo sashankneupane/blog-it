@@ -12,6 +12,6 @@ client.on(
 );
 client.once("open", () => console.log("Connected to the database."));
 
-const db = client.useDb("BlogIt");
+const db = client.useDb(process.env.DB_NAME);
 
 export default db;

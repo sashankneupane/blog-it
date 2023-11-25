@@ -1,3 +1,5 @@
+import bcryptjs from "bcryptjs";
+
 import User from "../db/models/User.mjs";
 import BlogPost from "../db/models/Blogpost.mjs";
 
@@ -39,29 +41,36 @@ export async function getDashboardPage(req, res) {
 
 export async function updateUser(req, res) {
   try {
-    const user = await getUserByUsername(req.user.username);
 
+    const user = await User.findById(req.user._id);
+
+    const isPasswordCorrect = await bcryptjs.compare(
+      req.body.password,
+      user.password
+    );
+
+    if (!isPasswordCorrect) {
+      return res.status(401).json({ message: "Incorrect password" });
+    }
+
+    // Update user information
     user.name = req.body.name;
     user.username = req.body.username;
     user.email = req.body.email;
 
-    if (req.body.password) {
-      user.password = req.body.password;
-    }
-
     await user.save();
 
-    // user stays logged in
+    // User stays logged in
     req.login(user, (err) => {
       if (err) {
         console.error(err);
-        res.redirect("/u/dashboard");
+        res.status(500).json({ message: "Internal server error" });
       } else {
-        res.redirect("/u/dashboard");
+        res.status(200).json({ message: "Updated successfully" });
       }
     });
   } catch (error) {
     console.error(error);
-    res.redirect("/u/dashboard");
+    res.status(500).json({ message: "Internal server error" });
   }
 }

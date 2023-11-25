@@ -104,8 +104,8 @@
                   <div class="flex items-center justify-start">
                     <img
                       class="w-10 h-10 rounded-full"
-                      src="/img/profile-user.png"
-                      alt="{{user.name}}"
+                      src="/img/dp/{{user/_id}}.png"
+                      alt="{{user/name}}"
                     />
                     <div class="ml-3">
                       <p class="text-sm font-semibold text-gray-900 dark:text-white">
@@ -188,7 +188,7 @@
       <div class="flex flex-col items-center space-x-4">
         <img
           class="w-32 h-32  rounded-full my-5"
-          src="/img/profile-user.png"
+          src="/img/dp/{{blogPost/author/_id}}.png"
           alt="Author Avatar"
         />
         {{#with blogPost.author}}
