@@ -10,6 +10,14 @@
   <!-- Center Section (Blog Content) -->
   <div class="center-section w-3/5 p-4 mt-4">
     {{#with blogPost}}
+      <div class="pb-4">
+        {{#each tags}}
+          <a
+            class="inline-block px-3 py-1 mr-2 text-sm font-semibold text-gray-700 bg-pink-300 rounded-full"
+            href="/home?tag={{name}}"
+          >{{name}}</a>
+        {{/each}}
+      </div>
       <!-- Blog Title -->
       <h1 class="text-3xl font-bold text-gray-900 mb-4">{{title}}</h1>
 
@@ -32,14 +40,13 @@
       <!-- Like and Comment Count -->
       <div class="mt-6 text-gray-700 flex flex-row justify-start">
         <div class="flex flex-row align-middle">
-            <span class="items-center align-middle">{{likes.length}}</span>
-            <svg class="w-6 h-6 ml-2" viewBox="0 0 25 25" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <path d="M8.9707 19.42V13.89" stroke="#000000" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-              <path d="M2.28234 12.67C2.25751 12.2167 2.32536 11.7631 2.48175 11.3369C2.63813 10.9106 2.87975 10.5208 3.19187 10.1911C3.504 9.86141 3.88006 9.59877 4.29708 9.41931C4.71411 9.23985 5.16335 9.14734 5.61735 9.14734C6.07135 9.14734 6.52058 9.23985 6.9376 9.41931C7.35463 9.59877 7.73069 9.86141 8.04281 10.1911C8.35493 10.5208 8.59657 10.9106 8.75296 11.3369C8.90934 11.7631 8.97717 12.2167 8.95234 12.67V18.3C8.97717 18.7533 8.90934 19.207 8.75296 19.6332C8.59657 20.0594 8.35493 20.4492 8.04281 20.7789C7.73069 21.1086 7.35463 21.3712 6.9376 21.5507C6.52058 21.7301 6.07135 21.8227 5.61735 21.8227C5.16335 21.8227 4.71411 21.7301 4.29708 21.5507C3.88006 21.3712 3.504 21.1086 3.19187 20.7789C2.87975 20.4492 2.63813 20.0594 2.48175 19.6332C2.32536 19.207 2.25751 18.7533 2.28234 18.3V12.67Z" stroke="#000000" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-              <path d="M8.97076 18.3C8.96813 18.7399 9.05217 19.176 9.21809 19.5835C9.38402 19.9909 9.62857 20.3617 9.93779 20.6747C10.247 20.9876 10.6148 21.2366 11.0203 21.4073C11.4257 21.5781 11.8608 21.6674 12.3008 21.67H16.4208C17.3814 21.6693 18.316 21.357 19.0841 20.78C19.8522 20.203 20.4125 19.3924 20.6808 18.47L22.1808 13.39C22.3002 13.0523 22.3372 12.691 22.2889 12.3361C22.2405 11.9812 22.1081 11.643 21.9028 11.3496C21.6974 11.0562 21.4249 10.816 21.108 10.6491C20.7911 10.4822 20.4389 10.3934 20.0808 10.39H14.5608V5.10999C14.5621 4.91825 14.5256 4.72818 14.4535 4.55054C14.3813 4.3729 14.2749 4.21121 14.1402 4.07471C14.0056 3.9382 13.8454 3.82953 13.6687 3.75494C13.4921 3.68036 13.3025 3.64132 13.1108 3.64001V3.64001C12.7953 3.64144 12.4889 3.74572 12.2381 3.93701C11.9872 4.1283 11.8056 4.39617 11.7208 4.70001L8.97076 13.86" stroke="#000000" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-            </svg>
+            <span id="like-count" class="items-center align-middle">{{likes.length}}</span>
+            <a id="like-btn" href="" data-blog-id="123">
+              <svg class="w-6 h-6 ml-2 hover:cursor-pointe {{#if liked}} fill-red {{else}} fill-none {{/if}} stroke-black" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 122.88 107.39">
+              <path class="cls-1" d="M60.83,17.18c8-8.35,13.62-15.57,26-17C110-2.46,131.27,21.26,119.57,44.61c-3.33,6.65-10.11,14.56-17.61,22.32-8.23,8.52-17.34,16.87-23.72,23.2l-17.4,17.26L46.46,93.55C29.16,76.89,1,55.92,0,29.94-.63,11.74,13.73.08,30.25.29c14.76.2,21,7.54,30.58,16.89Z"/>
+              </svg>
+            </a>
         </div>
-        
       <div class="flex flex-row align-middle ml-6">
         <span class="items-center align-middle">{{comments.length}}</span>
         <svg class="w-6 h-6 ml-2" viewBox="0 0 32 32" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:sketch="http://www.bohemiancoding.com/sketch/ns">
@@ -50,7 +57,7 @@
 
             </path>
                     </g>
-                </g>
+              </g>
       </svg>
       </div>
         
@@ -67,7 +74,7 @@
               <div class="mb-4">
                 <label for="comment" class="sr-only">Your comment</label>
                 <textarea
-                  id="comment"
+                  id="comment-box"
                   rows="2"
                   class="w-full p-3 text-sm resize-y text-gray-900 bg-white border border-gray-200 rounded-lg focus:ring-1 focus:ring-primary-400 dark:focus:ring-primary-900 focus:outline-none"
                   placeholder="Write a comment..."
@@ -75,6 +82,7 @@
                 ></textarea>
               </div>
               <button
+                id = "comment-btn"
                 type="submit"
                 class="py-2.5 px-4 mx-auto text-sm font-medium text-grey bg-red-300 rounded-lg hover:bg-red-400"
               >
@@ -92,83 +100,72 @@
                 <li
                   class="comment bg-white dark:bg-gray-800 shadow-lg rounded-lg mb-6"
                 >
-                  <div class="p-4">
-                    <div class="flex justify-between items-center mb-2">
-                      <div class="flex items-center">
-                        <img
-                          class="w-10 h-10 rounded-full"
-                          src="/img/profile-user.png"
-                          alt="{{author.name}}"
-                        />
-                        <div class="ml-3">
-                          <p
-                            class="text-sm font-semibold text-gray-900 dark:text-white"
-                          >
-                            {{author.name}}
-                          </p>
-                          <p class="text-sm text-gray-600 dark:text-gray-400">
-                            <time pubdate datetime="{{date}}">
-                              {{formatDate date}}
-                            </time>
-                          </p>
-                        </div>
-                      </div>
-                      <button
-                        id="dropdownComment{{comment.id}}Button"
-                        data-dropdown-toggle="dropdownComment{{comment.id}}"
-                        class="p-2 text-gray-500 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-700 focus:ring-2 focus:ring-primary-400 dark:focus:ring-primary-900 focus:outline-none rounded-full"
-                        type="button"
-                      >
-                        <svg
-                          class="w-4 h-4"
-                          xmlns="http://www.w3.org/2000/svg"
-                          fill="currentColor"
-                          viewBox="0 0 16 3"
-                        >
-                          <path
-                            d="M2 0a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3Zm6.041 0a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM14 0a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3Z"
-                          />
-                        </svg>
-                      </button>
-                      <div
-                        id="dropdownComment{{comment.id}}"
-                        class="hidden z-10 w-36 bg-white border border-gray-200 dark:border-gray-600 rounded divide-y divide-gray-200 dark:divide-gray-600 shadow-md absolute right-4 top-10"
-                      >
-                        <ul
-                          class="text-sm text-gray-700 dark:text-gray-200"
-                          aria-labelledby="dropdownComment{{comment.id}}Button"
-                        >
-                          <li>
-                            <a
-                              href="#"
-                              class="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
-                            >
-                              Edit
-                            </a>
-                          </li>
-                          <li>
-                            <a
-                              href="#"
-                              class="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
-                            >
-                              Remove
-                            </a>
-                          </li>
-                          <li>
-                            <a
-                              href="#"
-                              class="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
-                            >
-                              Report
-                            </a>
-                          </li>
-                        </ul>
+                  <div class="p-4 flex items-center justify-between">
+                  <div class="flex items-center justify-start">
+                    <img
+                      class="w-10 h-10 rounded-full"
+                      src="/img/profile-user.png"
+                      alt="{{user.name}}"
+                    />
+                    <div class="ml-3">
+                      <p class="text-sm font-semibold text-gray-900 dark:text-white">
+                        {{user.name}}
+                      </p>
+                      <p class="text-sm text-gray-600 dark:text-gray-400">
+                        <time pubdate datetime="{{date}}">
+                          {{formatDate createdAt}}
+                        </time>
+                      </p>
+                    </div>
+                  </div>
+
+                  <div id="{{_id}}" class="edit-delete-btn-container flex items-center" data-current-user="{{../../user/_id}}" data-comment-author="{{user/_id}}">
+                    <button
+                      id="edit-btn-{{_id}}"
+                      class="edit-btn hidden bg-blue-100 hover:bg-blue-200 p-2 rounded-md"
+                    >
+                      <img class="h-4 w-4" src="/img/edit.png" alt="Edit">
+                    </button>
+
+                    <button
+                      id="update-btn-{{_id}}"
+                      class="update-btn hidden bg-green-100 hover:bg-green-200 p-2 rounded-md ml-2"
+                    >
+                      <img class="h-4 w-4" src="/img/update.png" alt="Update">
+                    </button>
+
+                    <button
+                      id="delete-btn-{{_id}}"
+                      class="delete-btn hidden bg-red-100 hover:bg-red-200 p-2 rounded-md ml-2"
+                    >
+                      <img class="h-4 w-4" src="/img/delete.png" alt="Delete">
+                    </button>
+                    <div id="popup-modal" tabindex="-1" class="hidden fixed inset-0 items-center justify-center">
+                      <div class="relative p-4 w-full max-w-md max-h-full">
+                          <div class="relative bg-pink-100 rounded-lg shadow">
+                              <button id="close-btn" type="button" class="absolute top-3 end-2.5 text-gray-900 bg-red-200 hover:bg-gray-400 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center" data-modal-hide="popup-modal">
+                                  <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
+                                      <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"/>
+                                  </svg>
+                                  <span class="sr-only">Close modal</span>
+                              </button>
+                              <div class="p-4 md:p-5 text-center">
+                                  <svg class="mx-auto mb-4 text-gray-900 w-12 h-12" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
+                                      <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 11V6m0 8h.01M19 10a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"/>
+                                  </svg>
+                                  <h3 class="mb-5 text-lg font-normal text-gray-500">Are you sure you want to delete this comment?</h3>
+                                  <button id="confirm-btn" data-modal-hide="popup-modal" type="button" class="text-white bg-red-600 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm inline-flex items-center px-5 py-2.5 text-center me-2">
+                                      Yes, I'm sure
+                                  </button>
+                                  <button id="cancel-btn" data-modal-hide="popup-modal" type="button" class="text-gray-500 bg-white hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-gray-200 rounded-lg border border-gray-200 text-sm font-medium px-5 py-2.5 hover:text-gray-900 focus:z-10">No, cancel</button>
+                              </div>
+                          </div>
                       </div>
                     </div>
-                    <p
-                      class="text-gray-700 dark:text-gray-300"
-                    >{{this.text}}</p>
                   </div>
+                  
+                </div>
+                  <textarea id="comment-box-{{_id}}" class="text-gray-700  p-2 items-center pl-4 w-full outline-none border-none overflow-y-auto resize-none" readonly>{{this.text}}</textarea>
                 </li>
               {{/each}}
             </ul>
@@ -205,5 +202,7 @@
     </div>
   </aside>
   </a>
-
 </div>
+
+{{!-- include script --}}
+<script src="/js/blogs/blog-post.mjs"></script>

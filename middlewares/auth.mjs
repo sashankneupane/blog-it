@@ -59,3 +59,10 @@ export function ensureAuthentication(req, res, next) {
   }
   res.redirect("/auth/login");
 }
+
+export function ensureAuthenticationWithoutRedirect(req, res, next) {
+  if (req.isAuthenticated()) {
+    return next();
+  }
+  return res.status(401).json({ message: "Unauthorized" });
+}

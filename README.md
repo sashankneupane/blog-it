@@ -41,25 +41,25 @@ An Example Blogpost with Embedded Items:
 
 ## Site Map and Pages
 
-| Page                  | Description                                       | Path                 | Image                                          |
-|-----------------------|---------------------------------------------------|----------------------|------------------------------------------------|
-| Home                  | Home page                                         | `/home`              | ![Home Page](public/documentation/home.png)    |
-| Login                 | Login page                                        | `/login`             | ![Login Page](public/documentation/login.png)  |
-| Register              | Registration page                                 | `/register`          | ![Register Page](public/documentation/register.png)  |
-| User Public Page      | Public page displaying user's blog posts          | `/u/:username`       | ![User Public Page](public/documentation/username.png)  |
-| Blog Page             | Page displaying a specific blog post             | `/blog/:blogId`      | ![Blog Page](public/documentation/blog-post.png)  |
-| Edit Blog Page        | Edit page for a specific blog post (author only) | `/blog/:blogId/edit` | ![Edit Blog Page](public/documentation/blog-edit.png)  |
-| Write Blog Page       | Page for writing a new blog post (logged-in)     | `/blog/write`        | ![Write Blog Page](public/documentation/blog-create.png)  |
-| User Dashboard        | Dashboard with blog management options           | `/u/dashboard`       | ![User Dashboard](public/documentation/dashboard.png)  |
+| Page             | Description                                      | Path                 | Image                                                    |
+| ---------------- | ------------------------------------------------ | -------------------- | -------------------------------------------------------- |
+| Home             | Home page                                        | `/home`              | ![Home Page](public/documentation/home.png)              |
+| Login            | Login page                                       | `/login`             | ![Login Page](public/documentation/login.png)            |
+| Register         | Registration page                                | `/register`          | ![Register Page](public/documentation/register.png)      |
+| User Public Page | Public page displaying user's blog posts         | `/u/:username`       | ![User Public Page](public/documentation/username.png)   |
+| Blog Page        | Page displaying a specific blog post             | `/blog/:blogId`      | ![Blog Page](public/documentation/blog-post.png)         |
+| Edit Blog Page   | Edit page for a specific blog post (author only) | `/blog/:blogId/edit` | ![Edit Blog Page](public/documentation/blog-edit.png)    |
+| Write Blog Page  | Page for writing a new blog post (logged-in)     | `/blog/write`        | ![Write Blog Page](public/documentation/blog-create.png) |
+| User Dashboard   | Dashboard with blog management options           | `/u/dashboard`       | ![User Dashboard](public/documentation/dashboard.png)    |
 
 ## User Stories or Use Cases
 
 | #   | User Story                | Description                                                                                                                              |
-| --- | ------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------- |
+| --- | ------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------- | --- |
 | 1   | User Registration         | New users can register with a unique username and email to create an account and access the blog site.                                   |
-| 2   | User Login                | Registered users can log in using their username and password to access their accounts and personalized features.                        |                                      |
+| 2   | User Login                | Registered users can log in using their username and password to access their accounts and personalized features.                        |     |
 | 4   | User Profile              | Users have a profile page displaying their username, name, email, and a list of authored blog posts for personal information management. |
-| 5   | User Dashboard            | Logged-in users can access a dashboard to create new blog posts and edit/delete existing content easily.                                      |
+| 5   | User Dashboard            | Logged-in users can access a dashboard to create new blog posts and edit/delete existing content easily.                                 |
 | 6   | Blog Creation             | Users can create new blog posts by providing a title and content, sharing their thoughts and stories.                                    |
 | 7   | Blog Listing              | Users can view a list of all blog posts, discovering and reading content authored by others.                                             |
 | 8   | Individual Blog Post View | Users can read the full title and content of individual blog posts when they click on them.                                              |
@@ -71,11 +71,11 @@ An Example Blogpost with Embedded Items:
 
 | Checkbox | Points | Description                                                                |
 | :------: | :----: | -------------------------------------------------------------------------- |
-|   ✅    |   5    | Integrate user authentication with Passportjs                              |
-|   🛠️    |   4    | Implement client-side form validation using a JavaScript library.          |
-|   ✅    |   3    | Manage configuration variables using dotenv.                               |
-|   ✅    |   3    | Deploy the application on a Digital Ocean Droplet with a Namecheap domain. |
-|   ✅    |   2    | Style the site using Tailwind CSS.                |
+|    ✅    |   5    | Integrate user authentication with Passportjs                              |
+|    🛠️    |   4    | Implement client-side form validation using a JavaScript library.          |
+|    ✅    |   3    | Manage configuration variables using dotenv.                               |
+|    ✅    |   3    | Deploy the application on a Digital Ocean Droplet with a Namecheap domain. |
+|    ✅    |   2    | Style the site using Tailwind CSS.                                         |
 
 ## [Link to Initial Main Project File](app.mjs)
 

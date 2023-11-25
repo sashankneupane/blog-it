@@ -30,28 +30,6 @@ const blogPostSchema = new mongoose.Schema({
       ref: "Tag",
     },
   ],
-  comments: [
-    {
-      text: {
-        type: String,
-        required: true,
-      },
-      author: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: "User",
-      },
-      date: {
-        type: Date,
-        default: Date.now,
-      },
-    },
-  ],
-  likes: [
-    {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: "User",
-    },
-  ],
 });
 
 let BlogPost;

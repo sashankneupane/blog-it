@@ -34,17 +34,20 @@ async function getBlogPosts(query) {
   }
 
   try {
-    blogPosts = await BlogPost.find(filter).populate("author").populate("tags");
+    blogPosts = await BlogPost.find(filter)
+      .populate("author")
+      .populate("tags");
   } catch (error) {
     console.error("Error fetching blog posts:", error);
   }
-
   return blogPosts;
 }
+
 
 export async function getHomePage(req, res) {
   const data = {};
   data.blogPosts = await getBlogPosts(req.query);
+  // Fetch popular tags
   data.popularTags = await BlogPost.aggregate([
     {
       $unwind: "$tags",
@@ -57,7 +60,7 @@ export async function getHomePage(req, res) {
     },
     {
       $lookup: {
-        from: "tags", // Assuming your tags collection is named "tags"
+        from: "tags",
         localField: "_id",
         foreignField: "_id",
         as: "tagInfo",
@@ -79,16 +82,18 @@ export async function getHomePage(req, res) {
       $limit: 3,
     },
   ]);
+
+  // Fetch popular authors
   data.popularAuthors = await BlogPost.aggregate([
     {
       $group: {
         _id: "$author",
-        averageLikes: { $avg: { $size: "$likes" } },
+        averageLikes: { $avg: { $cond: [{ $isArray: "$likes" }, { $size: "$likes" }, 0] } },
       },
     },
     {
       $lookup: {
-        from: "users", // Assuming your users collection is named "users"
+        from: "users",
         localField: "_id",
         foreignField: "_id",
         as: "authorInfo",
@@ -109,13 +114,15 @@ export async function getHomePage(req, res) {
     {
       $limit: 3,
     },
-  ]);
+    ]);
+
   res.render("home", {
     data: data,
     query: req.query,
     user: req.user,
   });
 }
+
 
 export async function redirectToHomePage(req, res) {
   res.redirect("/home");

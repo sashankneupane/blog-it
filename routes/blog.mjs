@@ -7,9 +7,13 @@ import {
   getBlogEditPageById,
   editBlogPostById,
   deleteBlogPostById,
+  likeBlogPost,
   ensureOwnership,
+  commentBlogPost,
+  editCommentById,
+  deleteCommentById,
 } from "../controllers/blogController.mjs";
-import { ensureAuthentication } from "../middlewares/auth.mjs";
+import { ensureAuthentication, ensureAuthenticationWithoutRedirect } from "../middlewares/auth.mjs";
 
 const router = express.Router();
 
@@ -29,5 +33,19 @@ router.post("/:blogId/edit", ensureOwnership, editBlogPostById);
 
 // DELETE a blog post
 router.get("/:blogId/delete", ensureOwnership, deleteBlogPostById);
+
+// like a blog post
+router.post("/:blogId/like", ensureAuthenticationWithoutRedirect, likeBlogPost);
+
+// comment a blog post
+router.post("/:blogId/comment/write", ensureAuthenticationWithoutRedirect, commentBlogPost);
+
+// update comment on a blog post
+router.post("/:blogId/comment/:commentId/edit", ensureAuthenticationWithoutRedirect, editCommentById);
+
+// delete a comment
+router.post("/:blogId/comment/:commentId/delete", ensureAuthenticationWithoutRedirect, deleteCommentById);
+
+
 
 export default router;

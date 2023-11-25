@@ -31,6 +31,14 @@ export async function registerUser(req, res) {
   res.redirect("/");
 }
 
+export async function getUserInfo(req, res) {
+
+  const userWithoutPassword = req.user.toObject();
+  delete userWithoutPassword.password;
+
+  res.json(userWithoutPassword);
+};
+
 export async function loginUser(req, res, next) {
   const redirectTo = req.session.returnTo || "/home";
   passport.authenticate("local", (err, user, info) => {
