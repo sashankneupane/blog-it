@@ -119,7 +119,7 @@ function handleCommentUpdateBtnClick(e) {
         headers: {
             'Content-Type': 'application/json'
         },
-        body: JSON.stringify({ content: commentBox.value })
+        body: JSON.stringify({ text: commentBox.value })
     }).then((res) => {
         return res.json();
     }).then((data) => {
