@@ -5,7 +5,7 @@ import {
   getUserInfo,
   registerUser,
   loginUser,
-  logout,
+  logout
 } from "../controllers/authController.mjs";
 
 import { ensureAuthentication } from "../middlewares/auth.mjs";

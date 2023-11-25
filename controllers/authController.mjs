@@ -1,5 +1,7 @@
+import bcryptjs from "bcryptjs";
 import passport from "passport";
 import User from "../db/models/User.mjs";
+
 
 export async function getRegisterPage(req, res) {
   if (req.isAuthenticated()) {
@@ -23,12 +25,21 @@ export async function registerUser(req, res) {
   const user = new User({
     username: req.body.username,
     email: req.body.email,
-    password: req.body.password,
+    password: await bcryptjs.hash(req.body.password, 10),
     name: req.body.firstname + " " + req.body.lastname,
-    blogPosts: [],
   });
-  await user.save();
-  res.redirect("/");
+  try {
+    await user.save();
+    req.logIn(user, (err) => {
+      if (err) {
+        return next(err);
+      }
+      res.redirect('/home');
+    });
+  } catch (error) {
+    console.error('Error registering user:', error);
+    res.redirect('/auth/register');
+  }
 }
 
 export async function getUserInfo(req, res) {
