@@ -37,7 +37,9 @@ async function getBlogPosts(query) {
   }
 
   try {
-    blogPosts = await BlogPost.find(filter).populate("author").populate("tags");
+    blogPosts = await BlogPost.find(filter).populate("author").populate("tags").sort({ 
+      lastUpdated : -1 
+    })
   } catch (error) {
     console.error("Error fetching blog posts:", error);
   }

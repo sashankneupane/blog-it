@@ -1,4 +1,10 @@
+
 // utility functions
+function adjustTextareaHeight(textarea) {
+  textarea.style.height = "auto";
+  textarea.style.height = `${textarea.scrollHeight}px`;
+}
+
 function enableCommentBox(commentBox) {
   commentBox.readOnly = false;
   commentBox.focus();
@@ -44,6 +50,12 @@ function init() {
   editBtns = document.querySelectorAll(".edit-btn");
   updateBtns = document.querySelectorAll(".update-btn");
   deleteBtns = document.querySelectorAll(".delete-btn");
+
+  // adjust textarea height
+  commentBoxes = document.querySelectorAll(".comment-box");
+  commentBoxes.forEach((commentBox) => {
+    adjustTextareaHeight(commentBox);
+  });
 }
 
 // Event handlers
@@ -106,6 +118,10 @@ function handleCommentEditBtnClick(e) {
   const commentId = e.currentTarget.id.split("-")[2];
   const updateBtn = document.querySelector(`#update-btn-${commentId}`);
   const commentBox = document.querySelector(`#comment-box-${commentId}`);
+
+  commentBox.addEventListener("input", () => {
+    adjustTextareaHeight(commentBox);
+  });
 
   e.currentTarget.classList.toggle("hidden");
   updateBtn.classList.toggle("hidden");

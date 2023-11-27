@@ -925,10 +925,6 @@ video {
   flex-direction: column;
 }
 
-.flex-wrap {
-  flex-wrap: wrap;
-}
-
 .items-start {
   align-items: flex-start;
 }
@@ -1312,6 +1308,10 @@ video {
 
 .pl-10 {
   padding-left: 2.5rem;
+}
+
+.pl-2 {
+  padding-left: 0.5rem;
 }
 
 .pl-3 {
@@ -1849,10 +1849,6 @@ video {
 
   .sm\:w-full {
     width: 100%;
-  }
-
-  .sm\:max-w-md {
-    max-width: 28rem;
   }
 
   .sm\:max-w-sm {

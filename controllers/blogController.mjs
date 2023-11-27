@@ -42,18 +42,39 @@ export async function getWriteBlogPage(req, res) {
 
 export async function writeBlogPost(req, res) {
   const user = await getUserByID(req.user._id);
+  const tags = req.body.tagsInput.split(",");
+
+  const tagsToSave = [];
+  for (const tag of tags) {
+    const trimmedTag = tag.trim();
+    if (trimmedTag.length === 0) continue;
+    try {
+      let existingTag = await Tag.findOne({ name: trimmedTag });
+
+      if (!existingTag) {
+        existingTag = new Tag({ name: trimmedTag });
+        await existingTag.save();
+      }
+
+      tagsToSave.push(existingTag._id);
+    } catch (error) {
+      console.error("Error creating tag:", error);
+    }
+  }
+
   const blogPost = new BlogPost({
     title: req.body.title,
     content: req.body.content,
     author: user._id,
     publicationDate: Date.now(),
     lastUpdated: Date.now(),
-    comments: [],
-    likes: [],
+    tags: tagsToSave,
   });
+
   await blogPost.save();
   res.redirect(`/blog/${blogPost._id}`);
 }
+
 
 export async function getBlogPageById(req, res) {
   try {
@@ -122,31 +143,47 @@ export async function getRandomBlogPost(req, res) {
 }
 
 export async function getBlogEditPageById(req, res) {
-  const blogPost = await getBlogPostById(req.params.blogId);
-  res.render("blog-edit", {
-    blogPost: blogPost,
-    user: req.user,
-  });
-}
+  try {
+    const blogPost = await getBlogPostById(req.params.blogId);
+    await blogPost.populate("tags");
 
+    res.render("blog-edit", {
+      blogPost: blogPost,
+      user: req.user,
+    });
+  } catch (error) {
+    console.error("Error fetching blog post for edit:", error);
+    res.redirect("/error");
+  }
+}
 export async function editBlogPostById(req, res) {
+
+  const user = await getUserByID(req.user._id);
+  const tags = req.body.tagsInput.split(",");
+  
+  const tagsToSave = [];
+  for (const tag of tags) {
+    const trimmedTag = tag.trim();
+    if (trimmedTag.length === 0) continue;
+    try {
+      let existingTag = await Tag.findOne({ name: trimmedTag });
+      if (!existingTag) {
+        existingTag = new Tag({ name: trimmedTag });
+        await existingTag.save();
+      }
+      tagsToSave.push(existingTag._id);
+    } catch (error) {
+      console.error("Error creating tag:", error);
+    }
+  }
+  const blogPost = await getBlogPostById(req.params.blogId);
+
   const updatedFields = {
     title: req.body.title,
     content: req.body.content,
     lastUpdated: Date.now(),
-    tags: req.body.tags.split(","),
+    tags: tagsToSave,
   };
-  updatedFields.tags = updatedFields.tags.map((tag) => {
-    tag = tag.trim();
-    try {
-      const tagObj = Tag.findOne({ name: tag });
-      return tagObj._id;
-    } catch (error) {
-      const newTag = new Tag({ name: tag });
-      newTag.save();
-      return newTag._id;
-    }
-  });
   try {
     const result = await BlogPost.findByIdAndUpdate(
       req.params.blogId,

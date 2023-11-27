@@ -76,7 +76,7 @@
                 <textarea
                   id="comment-box"
                   rows="2"
-                  class="w-full p-3 text-sm resize-y text-gray-900 bg-white border border-gray-200 rounded-lg focus:ring-1 focus:ring-primary-400 dark:focus:ring-primary-900 focus:outline-none"
+                  class="comment-box w-full p-3 text-sm resize-none overflow-hidden text-gray-900 bg-white border border-gray-200 rounded-lg focus:ring-1 focus:ring-primary-400 dark:focus:ring-primary-900 focus:outline-none"
                   placeholder="Write a comment..."
                   required
                 ></textarea>
@@ -98,7 +98,7 @@
             <ul class="comment-list my-0 mt-6">
               {{#each comments}}
                 <li
-                  class="comment bg-white dark:bg-gray-800 shadow-lg rounded-lg mb-6"
+                  class="comment bg-pink-50 dark:bg-gray-800 shadow-lg mb-6"
                 >
                   <div class="p-4 flex items-center justify-between">
                   <div class="flex items-center justify-start">
@@ -108,10 +108,10 @@
                       alt="{{user/name}}"
                     />
                     <div class="ml-3">
-                      <p class="text-sm font-semibold text-gray-900 dark:text-white">
-                        {{user.name}}
+                      <p class="text-sm font-semibold text-gray-900">
+                        {{user/username}}
                       </p>
-                      <p class="text-sm text-gray-600 dark:text-gray-400">
+                      <p class="text-sm text-gray-600 ">
                         <time pubdate datetime="{{date}}">
                           {{formatDate createdAt}}
                         </time>
@@ -165,7 +165,7 @@
                   </div>
                   
                 </div>
-                  <textarea id="comment-box-{{_id}}" class="text-gray-700  p-2 items-center pl-4 w-full outline-none border-none overflow-y-auto resize-none" readonly>{{this.text}}</textarea>
+                  <textarea id="comment-box-{{_id}}" class="comment-box text-gray-700 bg-pink-50 p-2 items-center overflow-hidden resize-none pl-4 w-full outline-none border-none overflow-y-auto" readonly>{{this.text}}</textarea>
                 </li>
               {{/each}}
             </ul>
