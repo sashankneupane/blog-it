@@ -12,7 +12,10 @@
               Title
             </th>
             <th scope="col" class="px-6 py-3">
-              Date
+              Published
+            </th>
+            <th scope="col" class="px-6 py-3">
+              Last Updated
             </th>
             <th scope="col" class="px-6 py-3">
               Action
@@ -30,6 +33,9 @@
               </th>
               <td class="px-6 py-4">
                 {{formatDate publicationDate}}
+              </td>
+              <td class="px-6 py-4">
+                {{formatDate lastUpdated}}
               </td>
               <td class="px-6 py-4 flex flex-row justify-start">
                 <a
@@ -50,6 +56,11 @@
           {{/each}}
         </tbody>
       </table>
+      {{#unless userBlogs.length}}
+          <div class="py-4">
+              You have no blogpost yet. Write one <a class="text-blue-800" href="/blog/write">here</a>.
+          </div>
+        {{/unless}}
       <div id="popup-modal" tabindex="-1" class="hidden fixed inset-0 items-center justify-center">
         <div class="relative p-4 w-full max-w-md max-h-full">
             <div class="relative bg-pink-100 rounded-lg shadow">

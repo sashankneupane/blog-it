@@ -9,19 +9,6 @@ export default function setCommonMiddlewares(app) {
   const __filename = fileURLToPath(import.meta.url);
   const __dirname = path.dirname(path.dirname(__filename));
 
-  // const allowedOrigins = [
-  //   "http://localhost:3000",
-  //   "https://localhost:3000",
-  //   "http://ait-project.sashankneupane.com"
-  // ]
-
-  // const corsOptions = {
-  //   origin: allowedOrigins,
-  //   methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
-  //   credentials: true,
-  // };
-
-  // app.use(cors(corsOptions));
   app.use(express.static(path.resolve(__dirname, "public")));
   app.use(express.urlencoded({ extended: false }));
   app.use(express.json());

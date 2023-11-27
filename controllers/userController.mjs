@@ -9,24 +9,19 @@ async function getUserByUsername(username) {
 
 export async function getPublicUserBlogsPage(req, res) {
   const user = await getUserByUsername(req.params.username);
-  let blogPosts;
-  try {
-    blogPosts = await BlogPost.find({ author: user._id })
-      .populate("author")
-      .populate("tags");
-  } catch (error) {
-    console.error(error);
+  if (!user) {
+    return res.redirect("/");
   }
 
-  if (!user) {
-    res.redirect("/");
-  } else {
-    res.render("blog-list", {
-      username: user.username,
-      blogPosts: blogPosts,
-      user: req.user,
-    });
-  }
+  blogPosts = await BlogPost.find({ author: user._id })
+    .populate("author")
+    .populate("tags");
+
+  return res.render("blog-list", {
+    username: user.username,
+    blogPosts: blogPosts,
+    user: req.user,
+  });
 }
 
 export async function getDashboardPage(req, res) {
