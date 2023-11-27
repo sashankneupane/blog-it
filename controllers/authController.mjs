@@ -12,7 +12,8 @@ const __rootdir = path.dirname(__dirname);
 
 export async function getRegisterPage(req, res) {
   if (req.isAuthenticated()) {
-    res.redirect("/u/dashboard");
+    const queryParams = new URLSearchParams(req.query); 
+    res.redirect(`/u/dashboard?${queryParams}`);
   }
   res.render("register", {
     user: req.user,
@@ -21,10 +22,11 @@ export async function getRegisterPage(req, res) {
 
 export async function getLoginPage(req, res) {
   if (req.isAuthenticated()) {
-    res.redirect("/u/dashboard");
+    res.redirect(`/u/dashboard`);
   }
   res.render("login", {
     user: req.user,
+    query: req.query,
   });
 }
 
@@ -95,14 +97,15 @@ export async function getUserInfo(req, res) {
 }
 
 export async function loginUser(req, res, next) {
-  const redirectTo = req.session.returnTo || "/home";
+  const redirectTo = req.query.returnTo ||  req.session.returnTo || "/home";
+
   passport.authenticate("local", (err, user, info) => {
     if (err) {
       console.error("Error:", err);
       return next(err);
     }
     if (!user) {
-      return res.redirect("/auth/login");
+      return res.redirect(`/auth/login?error=${info.message}`);
     }
     req.logIn(user, (err) => {
       if (err) {

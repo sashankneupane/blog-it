@@ -54,7 +54,7 @@ export function ensureAuthentication(req, res, next) {
   if (req.isAuthenticated()) {
     return next();
   }
-  res.redirect("/auth/login");
+  res.redirect("/auth/login?returnTo=" + req.originalUrl);
 }
 
 export function ensureAuthenticationWithoutRedirect(req, res, next) {

@@ -1,12 +1,12 @@
-function showModal(modalId) {
-  const modal = document.getElementById(modalId);
+function showModal() {
+  const modal = document.getElementById('default-modal');
   modal.classList.remove("hidden");
   modal.classList.add("flex");
   document.body.classList.add("overflow-hidden");
 }
 
-function hideModal(modalId) {
-  const modal = document.getElementById(modalId);
+function hideModal() {
+  const modal = document.getElementById('default-modal');
   modal.classList.add("hidden");
   modal.classList.remove("flex");
   document.body.classList.remove("overflow-hidden");
@@ -103,6 +103,19 @@ function handleDOMLoaded() {
         element.addEventListener("click", handleModalHideClick);
     });
     registrationForm.addEventListener("submit", handleRegistrationFormSubmit);
+
+    window.addEventListener("click", function (event) {
+        if (event.target.id !== "default-modal") {
+            return;
+        }
+        hideModal();
+    });
+
+    window.addEventListener("keydown", function (event) {
+        if (event.key === "Escape") {
+            hideModal();
+        }
+    });
 }
 
 // event listeners

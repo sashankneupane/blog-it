@@ -30,7 +30,9 @@ export async function ensureOwnership(req, res, next) {
   if (req.isAuthenticated()) {
     res.redirect("/u/dashboard");
   } else {
-    res.redirect("/auth/login");
+    const queryParams = new URLSearchParams(req.query);
+    queryParams.append("returnTo", req.originalUrl);
+    res.redirect(`/auth/login?${queryParams}`);
   }
 }
 
@@ -158,7 +160,6 @@ export async function getBlogEditPageById(req, res) {
 }
 export async function editBlogPostById(req, res) {
 
-  const user = await getUserByID(req.user._id);
   const tags = req.body.tagsInput.split(",");
   
   const tagsToSave = [];
@@ -176,7 +177,6 @@ export async function editBlogPostById(req, res) {
       console.error("Error creating tag:", error);
     }
   }
-  const blogPost = await getBlogPostById(req.params.blogId);
 
   const updatedFields = {
     title: req.body.title,

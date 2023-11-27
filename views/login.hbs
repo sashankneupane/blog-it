@@ -15,7 +15,7 @@
     </div>
 
     <div class="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
-      <form class="space-y-6" action="/auth/login" method="POST">
+      <form class="space-y-6" action="/auth/login{{#if returnTo}}?returnTo={{req.query.returnTo}}{{/if}}" method="POST">
         <div>
           <label
             for="username"
@@ -50,6 +50,17 @@
           </div>
         </div>
 
+        <div id="error-container" class="error-container flex items-center justify-start rounded-md px-2 py-1 text-white">
+          {{#if query/error}}
+            <span class="py-2 text-red-600">{{query/error}}</span>
+            <button id="close-btn" class="close-btn flex flex-col">
+              <svg class="w-4 h-4 ml-4 fill-red-600 items-center align-middle" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
+                <path d="M10 8.59l-4.95-4.95-1.41 1.41L8.59 10 3.64 14.95l1.41 1.41L10 11.41l4.95 4.95 1.41-1.41L11.41 10l4.95-4.95-1.41-1.41L10 8.59z"/>
+              </svg>
+            </button>
+          {{/if}}
+        </div>
+
         <div>
           <button
             type="submit"
@@ -68,3 +79,5 @@
     </div>
   </div>
 </div>
+
+<script src="/js/auth/login.mjs"></script>

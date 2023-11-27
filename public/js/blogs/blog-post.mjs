@@ -30,6 +30,7 @@ let blogId, likeBtn, likeCount, likeIcon;
 let modal, confirmButton, cancelButton, closeButton;
 let commentBox, commentBtn;
 let commentBtns, editBtns, updateBtns, deleteBtns;
+;
 
 function init() {
   blogId = window.location.href.split("/").pop();
@@ -51,10 +52,30 @@ function init() {
   updateBtns = document.querySelectorAll(".update-btn");
   deleteBtns = document.querySelectorAll(".delete-btn");
 
+  const publishedDateContainer = document.querySelector(
+    "#published-date",
+  );
+  const updatedDateContainer = document.querySelector(
+    "#updated-date"
+  );
+
+  publishedDate = publishedDateContainer.dataset.publishedDate
+  updatedDate = updatedDateContainer.dataset.updatedDate;
+
+  if (publishedDate === updatedDate) {
+      publishedDateContainer.classList.remove("hidden");
+  } else {
+      updatedDateContainer.classList.remove("hidden");;
+  }
+
   // adjust textarea height
   commentBoxes = document.querySelectorAll(".comment-box");
   commentBoxes.forEach((commentBox) => {
     adjustTextareaHeight(commentBox);
+  });
+  const mainCommentBox = document.querySelector("#comment-box");
+  mainCommentBox.addEventListener("input", () => {
+    adjustTextareaHeight(mainCommentBox);
   });
 }
 
@@ -210,7 +231,9 @@ function handleDOMLoaded() {
 
   // all event listeners
   likeBtn.addEventListener("click", handleLikeBtnClick);
-  commentBtn.addEventListener("click", handleCommmentBtnClick);
+  if (commentBtn) {
+    commentBtn.addEventListener("click", handleCommmentBtnClick);
+  }
   editBtns.forEach((btn) => {
     btn.addEventListener("click", handleCommentEditBtnClick);
   });

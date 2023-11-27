@@ -2,12 +2,11 @@ function cleanupAlertContainers() {
   const successContainer = document.querySelector(".success-container");
   const errorContainer = document.querySelector(".error-container");
   successContainer.classList.add("hidden");
+  successContainer.classList.remove("flex");
   errorContainer.classList.add("hidden");
+  errorContainer.classList.remove("flex");
 }
 
-function closeAlert(alertContainer) {
-  alertContainer.classList.add("hidden");
-}
 
 document.addEventListener("DOMContentLoaded", () => {
   const profileUpdateBtn = document.querySelector("#profile-update-btn");
@@ -15,11 +14,9 @@ document.addEventListener("DOMContentLoaded", () => {
   const errorContainer = document.querySelector(".error-container");
 
   profileUpdateBtn.addEventListener("click", async (e) => {
-    e.preventDefault();
-    console.log("Update profile button clicked");
+    e.preventDefault();  
 
     const username = document.querySelector("#username").value;
-    const name = document.querySelector("#name").value;
     const email = document.querySelector("#email").value;
     const password = document.querySelector("#password").value;
 
@@ -31,7 +28,6 @@ document.addEventListener("DOMContentLoaded", () => {
         },
         body: JSON.stringify({
           username,
-          name,
           email,
           password,
         }),
@@ -42,21 +38,24 @@ document.addEventListener("DOMContentLoaded", () => {
 
       if (response.ok) {
         successContainer.classList.remove("hidden");
-        // const successMessage = successContainer.querySelector('.message');
-        // successMessage.textContent = responseData.message;
-        // successCloseBtn.classList.add('flex')
-        // successCloseBtn.classList.remove('hidden');
-        successContainer.textContent = responseData.message;
+        successContainer.classList.add("flex");
+        successContainer.childNodes[0].textContent = responseData.message;
       } else {
         errorContainer.classList.remove("hidden");
-        errorContainer.textContent = responseData.message;
-        // const errorMessage = errorContainer.querySelector('.message');
-        // errorMessage.textContent = responseData.message;
-        // errorCloseBtn.classList.add('flex')
-        // errorCloseBtn.classList.remove('hidden');
+        errorContainer.classList.add("flex");
+        errorContainer.childNodes[0].textContent = responseData.message;
       }
     } catch (error) {
       console.error("Error during fetch:", error);
     }
   });
+
+  const closeBtns = document.querySelectorAll(".close-btn");
+  closeBtns.forEach((closeBtn) => {
+    closeBtn.addEventListener("click", (e) => {
+      e.preventDefault();
+      cleanupAlertContainers();
+    });
+  });
 });
+

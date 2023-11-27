@@ -35,7 +35,7 @@ router.get("/:blogId/edit", ensureOwnership, getBlogEditPageById);
 router.post("/:blogId/edit", ensureOwnership, editBlogPostById);
 
 // DELETE a blog post
-router.get("/:blogId/delete", ensureOwnership, deleteBlogPostById);
+router.post("/:blogId/delete", ensureOwnership, deleteBlogPostById);
 
 // like a blog post
 router.post("/:blogId/like", ensureAuthenticationWithoutRedirect, likeBlogPost);
