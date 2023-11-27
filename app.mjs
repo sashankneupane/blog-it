@@ -4,16 +4,29 @@ import "./config.mjs";
 import "./db/index.mjs";
 
 import setCommonMiddlewares from "./middlewares/commonMiddlewares.mjs";
-import { setPassportStrategies } from "./middlewares/auth.mjs";
+
+import Auth from "./middlewares/auth.mjs";
 import appRouter from "./routes/index.mjs";
 
-const app = express();
-setCommonMiddlewares(app);
-setPassportStrategies(app);
 
-app.use("/", appRouter);
+class App {
+  constructor() {
+    this.app = express();
+    this.setup();
+  }
 
-const PORT = process.env.PORT || 3000;
-app.listen(PORT, () => {
-  console.log(`Server is running on port ${PORT}`);
-});
+  setup() {
+    const auth = new Auth(this.app);
+    setCommonMiddlewares(this.app);
+    this.app.use("/", appRouter);
+  }
+
+  start() {
+    const PORT = process.env.PORT || 3000;
+    this.app.listen(PORT, () => {
+      console.log(`Server is running on port ${PORT}`);
+    });
+  }
+}
+
+export default App;

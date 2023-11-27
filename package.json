@@ -3,7 +3,7 @@
   "name": "ait-final-project",
   "version": "1.0.0",
   "description": "Simple blog site.",
-  "main": "app.mjs",
+  "main": "index.mjs",
   "dependencies": {
     "accepts": "^1.3.8",
     "ansi-regex": "^5.0.1",
@@ -220,7 +220,7 @@
   "scripts": {
     "start": "npm-run-all -p build-tail start-app",
     "format": "prettier --write .",
-    "start-app": "nodemon app.mjs",
+    "start-app": "nodemon index.mjs",
     "build-tail": "tailwind -i ./styles/tailwindcss.css -o ./public/styles.css"
   },
   "repository": {

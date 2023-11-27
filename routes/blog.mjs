@@ -8,7 +8,6 @@ import {
   editBlogPostById,
   deleteBlogPostById,
   likeBlogPost,
-  ensureOwnership,
   commentBlogPost,
   editCommentById,
   deleteCommentById,
