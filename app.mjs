@@ -16,7 +16,7 @@ class App {
   }
 
   setup() {
-    const auth = new Auth(this.app);
+    new Auth(this.app);
     setCommonMiddlewares(this.app);
     this.app.use("/", appRouter);
   }
