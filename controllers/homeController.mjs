@@ -13,8 +13,11 @@ async function getBlogPosts(query) {
 
   if (query.author) {
     try {
-      const author = await User.findOne({ username: query.author });
-      filter.author = author._id;
+      const authors = await User.find({ username: { $regex: query.author, $options: 'i' } });
+      if (authors.length > 0) {
+        const authorIds = authors.map((author) => author._id);
+        filter.author = { $in: authorIds };
+      }
     } catch (error) {
       console.error("No such author:", error);
     }
