@@ -13,7 +13,10 @@ import {
   editCommentById,
   deleteCommentById,
 } from "../controllers/blogController.mjs";
-import { ensureAuthentication, ensureAuthenticationWithoutRedirect } from "../middlewares/auth.mjs";
+import {
+  ensureAuthentication,
+  ensureAuthenticationWithoutRedirect,
+} from "../middlewares/auth.mjs";
 
 const router = express.Router();
 
@@ -38,14 +41,24 @@ router.get("/:blogId/delete", ensureOwnership, deleteBlogPostById);
 router.post("/:blogId/like", ensureAuthenticationWithoutRedirect, likeBlogPost);
 
 // comment a blog post
-router.post("/:blogId/comment/write", ensureAuthenticationWithoutRedirect, commentBlogPost);
+router.post(
+  "/:blogId/comment/write",
+  ensureAuthenticationWithoutRedirect,
+  commentBlogPost,
+);
 
 // update comment on a blog post
-router.post("/:blogId/comment/:commentId/edit", ensureAuthenticationWithoutRedirect, editCommentById);
+router.post(
+  "/:blogId/comment/:commentId/edit",
+  ensureAuthenticationWithoutRedirect,
+  editCommentById,
+);
 
 // delete a comment
-router.post("/:blogId/comment/:commentId/delete", ensureAuthenticationWithoutRedirect, deleteCommentById);
-
-
+router.post(
+  "/:blogId/comment/:commentId/delete",
+  ensureAuthenticationWithoutRedirect,
+  deleteCommentById,
+);
 
 export default router;

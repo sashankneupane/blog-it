@@ -41,12 +41,11 @@ export async function getDashboardPage(req, res) {
 
 export async function updateUser(req, res) {
   try {
-
     const user = await User.findById(req.user._id);
 
     const isPasswordCorrect = await bcryptjs.compare(
       req.body.password,
-      user.password
+      user.password,
     );
 
     if (!isPasswordCorrect) {

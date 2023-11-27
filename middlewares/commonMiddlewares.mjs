@@ -6,7 +6,6 @@ import layouts from "handlebars-layouts";
 import { fileURLToPath } from "url";
 
 export default function setCommonMiddlewares(app) {
-
   const __filename = fileURLToPath(import.meta.url);
   const __dirname = path.dirname(path.dirname(__filename));
 

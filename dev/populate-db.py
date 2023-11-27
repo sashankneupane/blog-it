@@ -40,7 +40,6 @@ def generate_user():
         "username": fake.user_name(),
         "email": fake.email(),
         "password": fake.password(),
-        "name": fake.name(),
     }
 
 # Function to generate random data for the BlogPost schema

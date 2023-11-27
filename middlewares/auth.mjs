@@ -30,10 +30,7 @@ export function setPassportStrategies(app) {
         if (!user) {
           return done(null, false, { message: "Incorrect username." });
         }
-        const isValidPassword = await bcryptjs.compare(
-          password,
-          user.password,
-        );
+        const isValidPassword = await bcryptjs.compare(password, user.password);
         if (!isValidPassword) {
           return done(null, false, { message: "Incorrect password." });
         }

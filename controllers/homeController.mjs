@@ -34,15 +34,12 @@ async function getBlogPosts(query) {
   }
 
   try {
-    blogPosts = await BlogPost.find(filter)
-      .populate("author")
-      .populate("tags");
+    blogPosts = await BlogPost.find(filter).populate("author").populate("tags");
   } catch (error) {
     console.error("Error fetching blog posts:", error);
   }
   return blogPosts;
 }
-
 
 export async function getHomePage(req, res) {
   const data = {};
@@ -88,7 +85,9 @@ export async function getHomePage(req, res) {
     {
       $group: {
         _id: "$author",
-        averageLikes: { $avg: { $cond: [{ $isArray: "$likes" }, { $size: "$likes" }, 0] } },
+        averageLikes: {
+          $avg: { $cond: [{ $isArray: "$likes" }, { $size: "$likes" }, 0] },
+        },
       },
     },
     {
@@ -114,7 +113,7 @@ export async function getHomePage(req, res) {
     {
       $limit: 3,
     },
-    ]);
+  ]);
 
   res.render("home", {
     data: data,
@@ -122,7 +121,6 @@ export async function getHomePage(req, res) {
     user: req.user,
   });
 }
-
 
 export async function redirectToHomePage(req, res) {
   res.redirect("/home");

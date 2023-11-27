@@ -58,18 +58,18 @@ export async function writeBlogPost(req, res) {
 export async function getBlogPageById(req, res) {
   try {
     const blogPost = await getBlogPostById(req.params.blogId);
-    
+
     // Populate author information
     blogPost.author = await getUserByID(blogPost.author);
 
     // Populate comments information
-    const comments = await Comment.find({ 
-      blogPost: blogPost._id 
-    }).populate('user');
+    const comments = await Comment.find({
+      blogPost: blogPost._id,
+    }).populate("user");
     // Populate likes information
-    const likes = await Like.find({ 
-      blogPost: blogPost._id 
-    }).populate('user');
+    const likes = await Like.find({
+      blogPost: blogPost._id,
+    }).populate("user");
 
     blogPost.comments = comments;
     blogPost.likes = likes;
@@ -86,7 +86,7 @@ export async function getBlogPageById(req, res) {
     blogPost.author.blogPosts = await BlogPost.find({
       author: blogPost.author._id,
     });
-  
+
     // if authenticated check if user liked the post
     if (req.isAuthenticated()) {
       const like = await Like.findOne({
@@ -107,7 +107,6 @@ export async function getBlogPageById(req, res) {
     res.status(500).send("Internal Server Error");
   }
 }
-
 
 export async function getRandomBlogPost(req, res) {
   try {
@@ -180,7 +179,6 @@ export async function deleteBlogPostById(req, res) {
   }
 }
 
-
 // toggle like endpoint for AJAX requests
 export async function likeBlogPost(req, res) {
   try {
@@ -200,13 +198,13 @@ export async function likeBlogPost(req, res) {
       await like.save();
     }
     const numberOfLikes = await getNumberOfLikes(blogPost._id);
-    res.status(200).json({ 
+    res.status(200).json({
       success: true,
       liked: !alreadyLiked,
-      numberOfLikes: numberOfLikes 
+      numberOfLikes: numberOfLikes,
     });
-  } catch(error) {
-    console.log('Error liking blog post:', error);
+  } catch (error) {
+    console.log("Error liking blog post:", error);
     res.status(500).json({ success: false, error: error });
   }
 }
@@ -221,7 +219,7 @@ export async function commentBlogPost(req, res) {
       createdAt: Date.now(),
     });
     await comment.save();
-    res.status(200).json({ success: true, message: 'Comment saved.' });
+    res.status(200).json({ success: true, message: "Comment saved." });
   } catch (error) {
     console.error("Error commenting on blog post:", error);
     res.status(500).send("Internal Server Error");
@@ -239,7 +237,7 @@ export async function editCommentById(req, res) {
       { new: true },
     );
     if (result) {
-      res.status(200).json({ success: true, message: 'Comment updated.' });
+      res.status(200).json({ success: true, message: "Comment updated." });
     } else {
       res.status(404).send("Comment not found.");
     }
@@ -254,7 +252,7 @@ export async function deleteCommentById(req, res) {
   try {
     const result = await Comment.findByIdAndDelete(req.params.commentId);
     if (result) {
-      res.status(200).json({ success: true, message: 'Comment deleted.' });
+      res.status(200).json({ success: true, message: "Comment deleted." });
     } else {
       res.status(404).send("Comment not found.");
     }
