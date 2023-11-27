@@ -241,7 +241,6 @@ export async function likeBlogPost(req, res) {
       numberOfLikes: numberOfLikes,
     });
   } catch (error) {
-    console.log("Error liking blog post:", error);
     res.status(500).json({ success: false, error: error });
   }
 }
@@ -267,7 +266,6 @@ export async function commentBlogPost(req, res) {
 export async function editCommentById(req, res) {
   try {
     const comment = await Comment.findById(req.params.commentId);
-    console.log(comment);
     const result = await Comment.findByIdAndUpdate(
       req.params.commentId,
       { $set: { text: req.body.text } },

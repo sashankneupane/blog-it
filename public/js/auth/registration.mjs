@@ -79,7 +79,6 @@ function handleRegistrationFormSubmit(e) {
             password: password.value,
         }),
     }).then((res) => {
-        console.log(res)
         if (res.status !== 200) {
             res.json().then((data) => {
                 alert(data.message);

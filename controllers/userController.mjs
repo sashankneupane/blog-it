@@ -13,7 +13,7 @@ export async function getPublicUserBlogsPage(req, res) {
     return res.redirect("/");
   }
 
-  blogPosts = await BlogPost.find({ author: user._id })
+  const blogPosts = await BlogPost.find({ author: user._id })
     .populate("author")
     .populate("tags");
 
