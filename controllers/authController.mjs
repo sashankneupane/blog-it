@@ -2,9 +2,9 @@ import bcryptjs from "bcryptjs";
 import passport from "passport";
 import User from "../db/models/User.mjs";
 import fs from "fs/promises";
-import axios from "axios"
+import axios from "axios";
 import path from "path";
-import { fileURLToPath } from 'url';
+import { fileURLToPath } from "url";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -12,7 +12,7 @@ const __rootdir = path.dirname(__dirname);
 
 export async function getRegisterPage(req, res) {
   if (req.isAuthenticated()) {
-    const queryParams = new URLSearchParams(req.query); 
+    const queryParams = new URLSearchParams(req.query);
     res.redirect(`/u/dashboard?${queryParams}`);
   }
   res.render("register", {
@@ -31,24 +31,24 @@ export async function getLoginPage(req, res) {
 }
 
 async function fetchRandomImage(destinationPath) {
-  const apiUrl = 'https://api.unsplash.com/photos/random';
+  const apiUrl = "https://api.unsplash.com/photos/random";
   const params = {
-    'client_id': process.env.UNSPLASH_ACCESS_KEY,
-    'query': 'nature ai'
+    client_id: process.env.UNSPLASH_ACCESS_KEY,
+    query: "nature ai",
   };
 
   try {
     const response = await axios.get(apiUrl, {
       params: params,
-      responseType: 'json'
+      responseType: "json",
     });
 
     const imageResponse = await axios.get(response.data.urls.regular, {
-      responseType: 'arraybuffer'
+      responseType: "arraybuffer",
     });
     await fs.writeFile(destinationPath, imageResponse.data);
   } catch (error) {
-    console.error('Error fetching image:', error);
+    console.error("Error fetching image:", error);
   }
 }
 
@@ -74,7 +74,10 @@ export async function registerUser(req, res) {
     });
 
     await user.save();
-    const destinationPath = path.join(__rootdir, `/public/img/dp/${ user._id}.png`);
+    const destinationPath = path.join(
+      __rootdir,
+      `/public/img/dp/${user._id}.png`,
+    );
     fetchRandomImage(destinationPath);
 
     req.logIn(user, (err) => {
@@ -89,15 +92,8 @@ export async function registerUser(req, res) {
   }
 }
 
-export async function getUserInfo(req, res) {
-  const userWithoutPassword = req.user.toObject();
-  delete userWithoutPassword.password;
-
-  res.json(userWithoutPassword);
-}
-
 export async function loginUser(req, res, next) {
-  const redirectTo = req.query.returnTo ||  req.session.returnTo || "/home";
+  const redirectTo = req.query.returnTo || req.session.returnTo || "/home";
 
   passport.authenticate("local", (err, user, info) => {
     if (err) {

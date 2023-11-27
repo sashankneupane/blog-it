@@ -6,10 +6,12 @@ import {
 } from "../controllers/userController.mjs";
 import { ensureAuthentication } from "../middlewares/auth.mjs";
 
-const router = express.Router();
+const userRouter = express.Router();
 
-router.get("/dashboard", ensureAuthentication, getDashboardPage);
-router.post("/update-profile", ensureAuthentication, updateUser);
-router.get("/:username", getPublicUserBlogsPage);
+userRouter.get("/dashboard", ensureAuthentication, getDashboardPage);
 
-export default router;
+userRouter.post("/update-profile", ensureAuthentication, updateUser);
+
+userRouter.get("/:username", getPublicUserBlogsPage);
+
+export default userRouter;

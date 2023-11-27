@@ -13,7 +13,9 @@ async function getBlogPosts(query) {
 
   if (query.author) {
     try {
-      const authors = await User.find({ username: { $regex: query.author, $options: 'i' } });
+      const authors = await User.find({
+        username: { $regex: query.author, $options: "i" },
+      });
       if (authors.length > 0) {
         const authorIds = authors.map((author) => author._id);
         filter.author = { $in: authorIds };
@@ -37,9 +39,12 @@ async function getBlogPosts(query) {
   }
 
   try {
-    blogPosts = await BlogPost.find(filter).populate("author").populate("tags").sort({ 
-      lastUpdated : -1 
-    })
+    blogPosts = await BlogPost.find(filter)
+      .populate("author")
+      .populate("tags")
+      .sort({
+        lastUpdated: -1,
+      });
   } catch (error) {
     console.error("Error fetching blog posts:", error);
   }

@@ -4,9 +4,9 @@ import {
   redirectToHomePage,
 } from "../controllers/homeController.mjs";
 
-const router = express.Router();
+const homeRouter = express.Router();
 
-router.get("/home", getHomePage);
-router.get("/", redirectToHomePage);
+homeRouter.get("/", redirectToHomePage);
+homeRouter.get("/home", getHomePage);
 
-export default router;
+export default homeRouter;

@@ -14,48 +14,51 @@ import {
   deleteCommentById,
 } from "../controllers/blogController.mjs";
 import { ensureAuthentication } from "../middlewares/auth.mjs";
+import { createRoute } from "./index.mjs";
 
-const router = express.Router();
+const blogRouter = express.Router();
 
 // Random blog post
-router.get("/random", getRandomBlogPost);
+blogRouter.get("/random", getRandomBlogPost);
 
 // Page to write a new blog post
-router.get("/write", ensureAuthentication, getWriteBlogPage);
-router.post("/write", ensureAuthentication, writeBlogPost);
+createRoute(blogRouter, "/write", ensureAuthentication)
+  .get(getWriteBlogPage)
+  .post(writeBlogPost);
 
 // Page to view a single blog post
-router.get("/:blogId", getBlogPageById);
+blogRouter.get("/:blogId", getBlogPageById);
 
 // Page to edit a blog post
-router.get("/:blogId/edit", ensureOwnership, getBlogEditPageById);
-router.post("/:blogId/edit", ensureOwnership, editBlogPostById);
+createRoute(blogRouter, "/:blogId/edit", ensureAuthentication)
+  .get(getBlogEditPageById)
+  .post(editBlogPostById);
 
 // DELETE a blog post
-router.post("/:blogId/delete", ensureOwnership, deleteBlogPostById);
+blogRouter.post("/:blogId/delete", ensureOwnership, deleteBlogPostById);
 
 // like a blog post
-router.post("/:blogId/like", ensureAuthentication, likeBlogPost);
+blogRouter.post("/:blogId/like", ensureAuthentication, likeBlogPost);
 
 // comment a blog post
-router.post(
+blogRouter.post(
   "/:blogId/comment/write",
   ensureAuthentication,
   commentBlogPost,
 );
 
 // update comment on a blog post
-router.post(
+blogRouter.post(
   "/:blogId/comment/:commentId/edit",
   ensureAuthentication,
   editCommentById,
 );
 
 // delete a comment
-router.post(
+blogRouter.post(
   "/:blogId/comment/:commentId/delete",
   ensureAuthentication,
   deleteCommentById,
 );
 
-export default router;
+export default blogRouter;

@@ -7,14 +7,13 @@ function cleanupAlertContainers() {
   errorContainer.classList.remove("flex");
 }
 
-
 document.addEventListener("DOMContentLoaded", () => {
   const profileUpdateBtn = document.querySelector("#profile-update-btn");
   const successContainer = document.querySelector(".success-container");
   const errorContainer = document.querySelector(".error-container");
 
   profileUpdateBtn.addEventListener("click", async (e) => {
-    e.preventDefault();  
+    e.preventDefault();
 
     const username = document.querySelector("#username").value;
     const email = document.querySelector("#email").value;
@@ -58,4 +57,3 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   });
 });
-

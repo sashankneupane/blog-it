@@ -77,7 +77,6 @@ export async function writeBlogPost(req, res) {
   res.redirect(`/blog/${blogPost._id}`);
 }
 
-
 export async function getBlogPageById(req, res) {
   try {
     const blogPost = await getBlogPostById(req.params.blogId);
@@ -159,9 +158,8 @@ export async function getBlogEditPageById(req, res) {
   }
 }
 export async function editBlogPostById(req, res) {
-
   const tags = req.body.tagsInput.split(",");
-  
+
   const tagsToSave = [];
   for (const tag of tags) {
     const trimmedTag = tag.trim();

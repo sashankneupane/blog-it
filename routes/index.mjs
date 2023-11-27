@@ -1,15 +1,27 @@
 import express from "express";
 
-import homeRoutes from "./home.mjs";
-import authRoutes from "./auth.mjs";
-import userRoutes from "./user.mjs";
-import blogRoutes from "./blog.mjs";
+import homeRouter from "./home.mjs";
+import authRouter from "./auth.mjs";
+import userRouter from "./user.mjs";
+import blogRouter from "./blog.mjs";
 
-const router = express.Router();
+const appRouter = express.Router();
 
-router.use("/", homeRoutes);
-router.use("/auth", authRoutes);
-router.use("/u", userRoutes);
-router.use("/blog", blogRoutes);
+// Higher Order Function to create routes
+export function createRoute(router, path, ...middlewares) {
+  const addRoute = (method, handler) => {
+    router[method](path, ...middlewares, handler);
+    return createRoute(router, path, ...middlewares);
+  };
+  return {
+    get: (handler) => addRoute("get", handler),
+    post: (handler) => addRoute("post", handler),
+  };
+}
 
-export default router;
+appRouter.use("/", homeRouter);
+appRouter.use("/auth", authRouter);
+appRouter.use("/u", userRouter);
+appRouter.use("/blog", blogRouter);
+
+export default appRouter;

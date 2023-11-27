@@ -1,12 +1,12 @@
 function showModal() {
-  const modal = document.getElementById('default-modal');
+  const modal = document.getElementById("default-modal");
   modal.classList.remove("hidden");
   modal.classList.add("flex");
   document.body.classList.add("overflow-hidden");
 }
 
 function hideModal() {
-  const modal = document.getElementById('default-modal');
+  const modal = document.getElementById("default-modal");
   modal.classList.add("hidden");
   modal.classList.remove("flex");
   document.body.classList.remove("overflow-hidden");
@@ -17,104 +17,106 @@ let modalShowElements, modalHideElements;
 let registrationForm;
 
 function init() {
-    modalShowElements = document.querySelectorAll("[data-modal-show]");
-    modalHideElements = document.querySelectorAll("[data-modal-hide]");
-    registrationForm = document.getElementById("registration-form");
+  modalShowElements = document.querySelectorAll("[data-modal-show]");
+  modalHideElements = document.querySelectorAll("[data-modal-hide]");
+  registrationForm = document.getElementById("registration-form");
 }
 
 function handleModalShowClick(e) {
-    e.stopPropagation();
-    const modalId = e.target.getAttribute("data-modal-show");
-    showModal(modalId);
+  e.stopPropagation();
+  const modalId = e.target.getAttribute("data-modal-show");
+  showModal(modalId);
 }
 
 function handleModalHideClick(e) {
-    e.stopPropagation();
-    const modalId = e.target.getAttribute("data-modal-hide");
-    hideModal(modalId);
+  e.stopPropagation();
+  const modalId = e.target.getAttribute("data-modal-hide");
+  hideModal(modalId);
 }
 
 function validateEmail(email) {
-    // Use a regular expression for basic email validation
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    return emailRegex.test(email);
+  // Use a regular expression for basic email validation
+  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  return emailRegex.test(email);
 }
 
 function handleRegistrationFormSubmit(e) {
-    e.preventDefault();
+  e.preventDefault();
 
-    const username = document.getElementById("username");
-    const email = document.getElementById("email");
-    const password = document.getElementById("password");
-    const confirmPassword = document.getElementById("confirm-password");
+  const username = document.getElementById("username");
+  const email = document.getElementById("email");
+  const password = document.getElementById("password");
+  const confirmPassword = document.getElementById("confirm-password");
 
-    if (username.value.trim() === "") {
-        alert("Username cannot be empty");
-        return;
-    }
+  if (username.value.trim() === "") {
+    alert("Username cannot be empty");
+    return;
+  }
 
-    if (password.value.length < 8) {
-        alert("Password must be at least 8 characters long");
-        return;
-    }
+  if (password.value.length < 8) {
+    alert("Password must be at least 8 characters long");
+    return;
+  }
 
-    if (password.value !== confirmPassword.value) {
-        alert("Passwords do not match");
-        return;
-    }
+  if (password.value !== confirmPassword.value) {
+    alert("Passwords do not match");
+    return;
+  }
 
-    if (!validateEmail(email.value)) {
-        alert("Invalid email address");
-        return;
-    }
+  if (!validateEmail(email.value)) {
+    alert("Invalid email address");
+    return;
+  }
 
-    fetch("/auth/register", {
-        method: "POST",
-        headers: {
-            "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-            username: username.value,
-            email: email.value,
-            password: password.value,
-        }),
-    }).then((res) => {
-        if (res.status !== 200) {
-            res.json().then((data) => {
-                alert(data.message);
-            });
-        } else {
-            window.location.href = "/home";
-        }}) 
-        .catch((err) => {
-            console.error("Error registering user:", err);
-            alert("Internal server error");
+  fetch("/auth/register", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      username: username.value,
+      email: email.value,
+      password: password.value,
+    }),
+  })
+    .then((res) => {
+      if (res.status !== 200) {
+        res.json().then((data) => {
+          alert(data.message);
         });
+      } else {
+        window.location.href = "/home";
+      }
+    })
+    .catch((err) => {
+      console.error("Error registering user:", err);
+      alert("Internal server error");
+    });
 }
 
 // event handlers
 function handleDOMLoaded() {
-    init();
-    modalShowElements.forEach(function (element) {
-        element.addEventListener("click", handleModalShowClick);
-    });
-    modalHideElements.forEach(function (element) {
-        element.addEventListener("click", handleModalHideClick);
-    });
-    registrationForm.addEventListener("submit", handleRegistrationFormSubmit);
+  init();
+  modalShowElements.forEach(function (element) {
+    element.addEventListener("click", handleModalShowClick);
+  });
+  modalHideElements.forEach(function (element) {
+    element.addEventListener("click", handleModalHideClick);
+  });
+  registrationForm.addEventListener("submit", handleRegistrationFormSubmit);
 
-    window.addEventListener("click", function (event) {
-        if (event.target.id !== "default-modal") {
-            return;
-        }
-        hideModal();
-    });
+  window.addEventListener("click", function (event) {
+    if (event.target.id !== "default-modal") {
+      return;
+    }
+    hideModal();
+  });
 
-    window.addEventListener("keydown", function (event) {
-        if (event.key === "Escape") {
-            hideModal();
-        }
-    });
+  window.addEventListener("keydown", function (event) {
+    if (event.key === "Escape") {
+      hideModal();
+    }
+  });
 }
 
 // event listeners

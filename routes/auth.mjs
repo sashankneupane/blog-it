@@ -2,20 +2,23 @@ import express from "express";
 import {
   getRegisterPage,
   getLoginPage,
-  getUserInfo,
   registerUser,
   loginUser,
   logout,
 } from "../controllers/authController.mjs";
-
 import { ensureAuthentication } from "../middlewares/auth.mjs";
+import { createRoute } from "./index.mjs";
 
-const router = express.Router();
+const authRouter = express.Router();
 
+// ------------------ SUPER PRIVELEGED ROUTE ------------------
+// This route is only for the admin to update the password of all users
+// Hashes the password of all dummy users in the db created by Faker
 import bcryptjs from "bcryptjs";
 import User from "../db/models/User.mjs";
+import { create } from "hbs";
 
-router.get("/update", async (req, res) => {
+authRouter.get("/update", async (req, res) => {
   if (!req.isAuthenticated() || req.user.username !== "admin") {
     res.redirect("/");
   }
@@ -27,19 +30,15 @@ router.get("/update", async (req, res) => {
   }
   res.send("done");
 });
+// -----------------------------------------------------------
 
 // REGISTER Page
-router.get("/register", getRegisterPage);
-router.post("/register", registerUser);
+createRoute(authRouter, "/register").get(getRegisterPage).post(registerUser);
 
 // LOGIN Page
-router.get("/login", getLoginPage);
-router.post("/login", loginUser);
-
-// USER INFO Page
-router.get("/user", ensureAuthentication, getUserInfo);
+createRoute(authRouter, "/login").get(getLoginPage).post(loginUser);
 
 // LOGOUT Page
-router.get("/logout", logout);
+authRouter.get("/logout", ensureAuthentication, logout);
 
-export default router;
+export default authRouter;
