@@ -69,6 +69,10 @@ function handleTagInput() {
 function handleBlogFormSubmit(e) {
     e.preventDefault();
     const tagInput = document.querySelector("#tags");
+    const value = tagInput.value.trim();
+    if (value.length > 0 && !tags.includes(value)) {
+        tags.push(value);
+    }
     tagInput.value = tags.join(",");
     e.target.submit();
 }
