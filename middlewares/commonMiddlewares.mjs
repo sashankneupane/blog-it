@@ -1,9 +1,22 @@
 import express from "express";
 import path from "path";
-// import cors from "cors";
 import { create, engine } from "express-handlebars";
 import layouts from "handlebars-layouts";
 import { fileURLToPath } from "url";
+
+// Higher Order Function to chain middlewares
+export function chainMiddlewares(...middlewares) {
+  return function (req, res, next) {
+    const nextMiddleware = (index) => {
+      if (index >= middlewares.length) {
+        return next();
+      }
+      const middleware = middlewares[index];
+      middleware(req, res, () => nextMiddleware(index + 1));
+    };
+    nextMiddleware(0);
+  }
+}
 
 export default function setCommonMiddlewares(app) {
   const __filename = fileURLToPath(import.meta.url);

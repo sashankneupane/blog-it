@@ -4,6 +4,9 @@ import Tag from "../db/models/Tag.mjs";
 import Comment from "../db/models/Comment.mjs";
 import Like from "../db/models/Like.mjs";
 
+import { ensureAuthentication } from "../middlewares/auth.mjs";
+import { chainMiddlewares } from "../middlewares/commonMiddlewares.mjs";
+
 async function getNumberOfLikes(blogPostId) {
   try {
     return await Like.countDocuments({ blogPost: blogPostId });
@@ -20,62 +23,62 @@ async function getUserByID(id) {
   return await User.findById(id);
 }
 
-export async function ensureOwnership(req, res, next) {
-  if (req.isAuthenticated()) {
+// use chain middlewares to ensure authentication and ownership
+export const ensureOwnership = chainMiddlewares(
+  ensureAuthentication,
+  async (req, res, next) => {
     const blogPost = await getBlogPostById(req.params.blogId);
     if (blogPost && req.user._id.toString() === blogPost.author.toString()) {
       return next();
     }
-  }
-  if (req.isAuthenticated()) {
     res.redirect("/u/dashboard");
-  } else {
-    const queryParams = new URLSearchParams(req.query);
-    queryParams.append("returnTo", req.originalUrl);
-    res.redirect(`/auth/login?${queryParams}`);
-  }
-}
-
-export async function getWriteBlogPage(req, res) {
-  res.render("write", {
-    user: req.user,
   });
-}
 
-export async function writeBlogPost(req, res) {
-  const user = await getUserByID(req.user._id);
-  const tags = req.body.tagsInput.split(",");
 
-  const tagsToSave = [];
-  for (const tag of tags) {
-    const trimmedTag = tag.trim();
-    if (trimmedTag.length === 0) continue;
-    try {
-      let existingTag = await Tag.findOne({ name: trimmedTag });
+export const getWriteBlogPage = chainMiddlewares(
+  ensureAuthentication,
+  async (req, res) => {
+    res.render("write", {
+      user: req.user,
+    });
+  });
 
-      if (!existingTag) {
-        existingTag = new Tag({ name: trimmedTag });
-        await existingTag.save();
+export const writeBlogPost = chainMiddlewares(
+  ensureAuthentication,
+  async (req, res) => {
+    const user = await getUserByID(req.user._id);
+    const tags = req.body.tagsInput.split(",");
+
+    const tagsToSave = [];
+    for (const tag of tags) {
+      const trimmedTag = tag.trim();
+      if (trimmedTag.length === 0) continue;
+      try {
+        let existingTag = await Tag.findOne({ name: trimmedTag });
+
+        if (!existingTag) {
+          existingTag = new Tag({ name: trimmedTag });
+          await existingTag.save();
+        }
+
+        tagsToSave.push(existingTag._id);
+      } catch (error) {
+        console.error("Error creating tag:", error);
       }
-
-      tagsToSave.push(existingTag._id);
-    } catch (error) {
-      console.error("Error creating tag:", error);
     }
-  }
 
-  const blogPost = new BlogPost({
-    title: req.body.title,
-    content: req.body.content,
-    author: user._id,
-    publicationDate: Date.now(),
-    lastUpdated: Date.now(),
-    tags: tagsToSave,
-  });
+    const blogPost = new BlogPost({
+      title: req.body.title,
+      content: req.body.content,
+      author: user._id,
+      publicationDate: Date.now(),
+      lastUpdated: Date.now(),
+      tags: tagsToSave,
+    });
 
-  await blogPost.save();
-  res.redirect(`/blog/${blogPost._id}`);
-}
+    await blogPost.save();
+    res.redirect(`/blog/${blogPost._id}`);
+});
 
 export async function getBlogPageById(req, res) {
   try {
@@ -143,21 +146,26 @@ export async function getRandomBlogPost(req, res) {
   }
 }
 
-export async function getBlogEditPageById(req, res) {
-  try {
-    const blogPost = await getBlogPostById(req.params.blogId);
-    await blogPost.populate("tags");
+export const getBlogEditPageById = chainMiddlewares(
+  ensureOwnership,
+  async (req, res) => {
+    try {
+      const blogPost = await getBlogPostById(req.params.blogId);
+      await blogPost.populate("tags");
 
-    res.render("blog-edit", {
-      blogPost: blogPost,
-      user: req.user,
-    });
-  } catch (error) {
-    console.error("Error fetching blog post for edit:", error);
-    res.redirect("/error");
-  }
-}
-export async function editBlogPostById(req, res) {
+      res.render("blog-edit", {
+        blogPost: blogPost,
+        user: req.user,
+      });
+    } catch (error) {
+      console.error("Error fetching blog post for edit:", error);
+      res.redirect("/error");
+    }
+  });
+
+export const editBlogPostById = chainMiddlewares(
+  ensureOwnership,
+  async function (req, res) {
   const tags = req.body.tagsInput.split(",");
 
   const tagsToSave = [];
@@ -198,9 +206,11 @@ export async function editBlogPostById(req, res) {
     console.error("Error updating blog post:", error);
     res.status(500).send("Internal Server Error");
   }
-}
+});
 
-export async function deleteBlogPostById(req, res) {
+export const deleteBlogPostById = chainMiddlewares(
+  ensureOwnership,
+  async (req, res) => {
   try {
     const result = await BlogPost.findByIdAndDelete(req.params.blogId);
     if (result) {
@@ -212,7 +222,7 @@ export async function deleteBlogPostById(req, res) {
     console.error("Error deleting blog post:", error);
     res.status(500).send("Internal Server Error");
   }
-}
+});
 
 // toggle like endpoint for AJAX requests
 export async function likeBlogPost(req, res) {

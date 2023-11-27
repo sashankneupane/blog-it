@@ -22,7 +22,7 @@ const blogRouter = express.Router();
 blogRouter.get("/random", getRandomBlogPost);
 
 // Page to write a new blog post
-createRoute(blogRouter, "/write", ensureAuthentication)
+createRoute(blogRouter, "/write")
   .get(getWriteBlogPage)
   .post(writeBlogPost);
 
@@ -30,12 +30,12 @@ createRoute(blogRouter, "/write", ensureAuthentication)
 blogRouter.get("/:blogId", getBlogPageById);
 
 // Page to edit a blog post
-createRoute(blogRouter, "/:blogId/edit", ensureAuthentication)
+createRoute(blogRouter, "/:blogId/edit")
   .get(getBlogEditPageById)
   .post(editBlogPostById);
 
 // DELETE a blog post
-blogRouter.post("/:blogId/delete", ensureOwnership, deleteBlogPostById);
+blogRouter.post("/:blogId/delete", deleteBlogPostById);
 
 // like a blog post
 blogRouter.post("/:blogId/like", ensureAuthentication, likeBlogPost);

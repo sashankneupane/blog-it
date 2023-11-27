@@ -3,6 +3,9 @@ import bcryptjs from "bcryptjs";
 import User from "../db/models/User.mjs";
 import BlogPost from "../db/models/Blogpost.mjs";
 
+import { chainMiddlewares } from "../middlewares/commonMiddlewares.mjs";
+import { ensureAuthentication } from "../middlewares/auth.mjs";
+
 async function getUserByUsername(username) {
   return await User.findOne({ username: username });
 }
@@ -24,8 +27,9 @@ export async function getPublicUserBlogsPage(req, res) {
   });
 }
 
-export async function getDashboardPage(req, res) {
-  if (req.isAuthenticated()) {
+export const getDashboardPage = chainMiddlewares(
+  ensureAuthentication,
+  async (req, res) => {
     const user = req.user;
     const blogPosts = await BlogPost.find({ author: user._id });
     res.render("dashboard", {
@@ -33,10 +37,8 @@ export async function getDashboardPage(req, res) {
       userBlogs: blogPosts,
       user: req.user,
     });
-  } else {
-    res.redirect("/auth/login");
-  }
-}
+  },
+)
 
 export async function updateUser(req, res) {
   try {

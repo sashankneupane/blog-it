@@ -8,7 +8,7 @@ import { ensureAuthentication } from "../middlewares/auth.mjs";
 
 const userRouter = express.Router();
 
-userRouter.get("/dashboard", ensureAuthentication, getDashboardPage);
+userRouter.get("/dashboard", getDashboardPage);
 
 userRouter.post("/update-profile", ensureAuthentication, updateUser);
 
