@@ -16,7 +16,6 @@ const authRouter = express.Router();
 // Hashes the password of all dummy users in the db created by Faker
 import bcryptjs from "bcryptjs";
 import User from "../db/models/User.mjs";
-import { create } from "hbs";
 
 authRouter.get("/update", async (req, res) => {
   if (!req.isAuthenticated() || req.user.username !== "admin") {
