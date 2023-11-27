@@ -16,8 +16,10 @@ import bcryptjs from "bcryptjs";
 import User from "../db/models/User.mjs";
 
 router.get("/update", async (req, res) => {
+  if (!req.isAuthenticated() || req.user.username !== "admin") {
+    res.redirect("/");
+  }
   const users = await User.find({});
-
   for (const user of users) {
     const hashedPassword = await bcryptjs.hash(user.password, 10);
     user.password = hashedPassword;
