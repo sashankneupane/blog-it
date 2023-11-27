@@ -54,7 +54,7 @@ An Example Blogpost with Embedded Items:
 
 ## User Stories or Use Cases
 
-| #   | User Story                | Description                                                                                                                              |
+| #   | User Story                | Description                                                                                                 |                             |
 | --- | ------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------- | --- |
 | 1   | User Registration         | New users can register with a unique username and email to create an account and access the blog site.                                   |
 | 2   | User Login                | Registered users can log in using their username and password to access their accounts and personalized features.                        |     |
@@ -71,19 +71,19 @@ An Example Blogpost with Embedded Items:
 
 | Checkbox | Points | Description                                                                |
 | :------: | :----: | -------------------------------------------------------------------------- |
-|    ✅    |   5    | Integrate user authentication with Passportjs                              |
-|    🛠️    |   4    | Implement client-side form validation using a JavaScript library.          |
-|    ✅    |   3    | Manage configuration variables using dotenv.                               |
-|    ✅    |   3    | Deploy the application on a Digital Ocean Droplet with a Namecheap domain. |
-|    ✅    |   2    | Style the site using Tailwind CSS.                                         |
+|    ✅    |   2    | [Integrate user authentication with Passportjs](https://github.com/nyu-csci-ua-0467-001-002-fall-2023/final-project-sashankneupane/blob/master/middlewares/auth.mjs#L9-L60)                              |
+|    ✅    |   3    | Implement client-side form validation. [[1](https://github.com/nyu-csci-ua-0467-001-002-fall-2023/final-project-sashankneupane/blob/master/public/js/auth/registration.mjs#L37-L95) [2](https://github.com/nyu-csci-ua-0467-001-002-fall-2023/final-project-sashankneupane/blob/master/public/js/blogs/write-blog.mjs#L83-L92) [3](https://github.com/nyu-csci-ua-0467-001-002-fall-2023/final-project-sashankneupane/blob/master/public/js/blogs/edit-blog.mjs#L93-L103)] and multiple other places         |
+|    ✅    |   1    | [Use dotenv to manage sensitive config variables.](https://github.com/nyu-csci-ua-0467-001-002-fall-2023/final-project-sashankneupane/blob/master/config.mjs#L1-L2)                        |
+|    ✅    |   2    | [Deploy the application on a Digital Ocean Droplet with a Namecheap domain.](http://ait-project.sashankneupane.com) |
+|    ✅    |   2    | [Style the site using Tailwind CSS.](./public/styles.css), [Config files](./tailwind.config.js)                      |
 
 ## [Link to Initial Main Project File](app.mjs)
 
 ## Annotations / References Used
 
 1. [passport.js authentication docs](http://passportjs.org/docs) - ([usage](middlewares/auth.mjs))
-2. [CKEditor 5](https://ckeditor.com/docs/ckeditor5/latest/builds/guides/integration/frameworks/react.html) - ([usage](views/write.hbs#L60-L73))
-3. [Tailwind CSS](https://tailwindcss.com)- ([usage](/tailwind.config.js#L1-L11))
+2. [Tailwind CSS](https://tailwindcss.com)- ([usage](/tailwind.config.js#L1-L11))
+3. [Flowbit](https://flowbite.com/docs/components/) - For some tailwind components
 4. [dotenv](https://www.npmjs.com/package/dotenv) - ([usage](config.mjs#L1-L2))
 5. [Digital Ocean](https://www.digitalocean.com/) - For hosting the application
 6. [Namecheap](https://www.namecheap.com/) - For the domain name
